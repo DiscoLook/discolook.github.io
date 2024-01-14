@@ -20,8 +20,16 @@
         }
 
         h1 {
-            color: #7289DA; /* Discord color */
+            color: #5865F2; /* Discord color */
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        #logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
         }
 
         #userSearch {
@@ -95,7 +103,10 @@
 </head>
 <body>
 
-    <h1>DiscoLook</h1>
+    <h1>
+        <img id="logo" src="https://i.ibb.co/4ZxkRGs/Adobe-Express-20240114-1109270-1.png" alt="DiscoLook Logo">
+        DiscoLook
+    </h1>
 
     <!-- Search bar -->
     <input type="text" id="userSearch" placeholder="Enter User ID">
