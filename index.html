@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DiscoLook</title>
-    <style>
+<style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background-color: #222; /* Dark background color */
+            color: #fff; /* Text color */
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,7 +19,7 @@
         }
 
         h1 {
-            color: #333;
+            color: #7289DA; /* Discord color */
             margin-bottom: 20px;
         }
 
@@ -27,20 +28,24 @@
             font-size: 16px;
             margin-right: 10px;
             z-index: 2; /* Ensure search elements are on top */
+            background-color: #333; /* Darker input background */
+            color: #fff; /* Light text color */
+            border: none;
         }
 
         #searchButton {
             padding: 10px;
             font-size: 16px;
-            background-color: #7289DA; /* Discord color */
+            background-color: #5865F2; /* Darker blurple color */
             color: #fff;
             cursor: pointer;
             border: none;
             transition: background-color 0.3s ease;
+            border-radius: 5px; /* Rounded corners */
         }
 
         #searchButton:hover {
-            background-color: #677bc4; /* Darker shade on hover */
+            background-color: #4E5CB5; /* Darker shade on hover */
         }
 
         #userDecoration {
@@ -48,7 +53,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 32px; /* Increased margin from the search bar */
             z-index: 0; /* Set z-index to default (0) */
         }
 
@@ -66,7 +71,24 @@
             height: 512px; /* Set the height to maintain aspect ratio */
             margin-top: 10px;
             border-radius: 50%;
-            border: 5px solid #fff;
+            border: none; /* Remove the border */
+        }
+
+        .downloadButton {
+            display: none; /* Hide download buttons by default */
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #5865F2; /* Darker blurple color */
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .downloadButton:hover {
+            background-color: #4E5CB5; /* Darker shade on hover */
         }
     </style>
 </head>
