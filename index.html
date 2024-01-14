@@ -8,8 +8,8 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #222; /* Dark background color */
-            color: #fff; /* Text color */
+            background-color: #222;
+            color: #fff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -20,7 +20,7 @@
         }
 
         h1 {
-            color: #5865F2; /* Discord color */
+            color: #5865F2;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -36,25 +36,25 @@
             padding: 10px;
             font-size: 16px;
             margin-right: 10px;
-            z-index: 2; /* Ensure search elements are on top */
-            background-color: #333; /* Darker input background */
-            color: #fff; /* Light text color */
+            z-index: 2;
+            background-color: #333;
+            color: #fff;
             border: none;
         }
 
         #searchButton {
             padding: 10px;
             font-size: 16px;
-            background-color: #5865F2; /* Darker blurple color */
+            background-color: #5865F2;
             color: #fff;
             cursor: pointer;
             border: none;
             transition: background-color 0.3s ease;
-            border-radius: 5px; /* Rounded corners */
+            border-radius: 5px;
         }
 
         #searchButton:hover {
-            background-color: #4E5CB5; /* Darker shade on hover */
+            background-color: #4E5CB5;
         }
 
         #userDecoration {
@@ -62,8 +62,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 32px; /* Increased margin from the search bar */
-            z-index: 0; /* Set z-index to default (0) */
+            margin-top: 32px;
+            z-index: 0;
         }
 
         #decoration {
@@ -71,33 +71,33 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 614px; /* 1.2x larger than the profile picture (512 * 1.2) */
-            z-index: 1; /* Ensure the decoration is on top */
+            width: 614px;
+            z-index: 1;
         }
 
         #profilePicture {
-            width: 512px; /* Resized to 512x512 */
-            height: 512px; /* Set the height to maintain aspect ratio */
+            width: 512px;
+            height: 512px;
             margin-top: 10px;
             border-radius: 50%;
-            border: none; /* Remove the border */
+            border: none;
         }
 
         .downloadButton {
-            display: none; /* Hide download buttons by default */
+            display: none;
             margin-top: 20px;
             padding: 10px;
             font-size: 16px;
-            background-color: #5865F2; /* Darker blurple color */
+            background-color: #5865F2;
             color: #fff;
             cursor: pointer;
             border: none;
             transition: background-color 0.3s ease;
-            border-radius: 5px; /* Rounded corners */
+            border-radius: 5px;
         }
 
         .downloadButton:hover {
-            background-color: #4E5CB5; /* Darker shade on hover */
+            background-color: #4E5CB5;
         }
     </style>
 </head>
@@ -117,21 +117,15 @@
 
     <script>
         function searchUser() {
-            // Get user ID from the search bar
             const userId = document.getElementById('userSearch').value;
-
-            // Reset content inside the userDecoration element
             const userDecorationElement = document.getElementById('userDecoration');
             userDecorationElement.innerHTML = "";
 
-            // Fetch user data from the API
             fetch(`https://decor.fieryflames.dev/api/users/${userId}`)
                 .then(response => response.json())
                 .then(data => {
-                    // Get decoration hash from the response
                     const decorationHash = data.decorationHash;
 
-                    // Display user decoration
                     userDecorationElement.innerHTML = `
                         <img id="decoration" src="https://ugc.decor.fieryflames.dev/${decorationHash}.png?animate=true" alt="User Decoration">
                         <img id="profilePicture" src="https://raw.githubusercontent.com/UserPFP/img/main/Avatars/${userId.charAt(0)}/${userId}.gif" alt="Profile Picture">
