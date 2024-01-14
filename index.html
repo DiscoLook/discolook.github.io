@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Decoration</title>
+    <style>
+        #userDecoration {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #decoration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 614px; /* 1.2x larger than the profile picture (512 * 1.2) */
+            z-index: 1; /* Ensure the decoration is on top */
+        }
+
+        #profilePicture {
+            width: 512px; /* Resized to 512x512 */
+            height: 512px; /* Set the height to maintain aspect ratio */
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Search bar -->
+    <input type="text" id="userSearch" placeholder="Enter User ID">
+    <button onclick="searchUser()">Search</button>
+
+    <!-- Display user decoration and profile picture -->
+    <div id="userDecoration"></div>
+
+    <script>
+        function searchUser() {
+            // Get user ID from the search bar
+            const userId = document.getElementById('userSearch').value;
+
+            // Fetch user data from the API
+            fetch(`https://decor.fieryflames.dev/api/users/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Get decoration hash from the response
+                    const decorationHash = data.decorationHash;
+
+                    // Display user decoration
+                    const userDecorationElement = document.getElementById('userDecoration');
+                    userDecorationElement.innerHTML = `
+                        <img id="decoration" src="https://ugc.decor.fieryflames.dev/${decorationHash}.png?animate=true" alt="User Decoration">
+                        <img id="profilePicture" src="https://raw.githubusercontent.com/UserPFP/img/main/Avatars/${userId.charAt(0)}/${userId}.gif" alt="Profile Picture">
+                    `;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+</body>
+</html>
