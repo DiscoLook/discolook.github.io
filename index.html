@@ -5,11 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Decoration</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #userSearch {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            z-index: 2; /* Ensure search elements are on top */
+        }
+
+        #searchButton {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #7289DA; /* Discord color */
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        #searchButton:hover {
+            background-color: #677bc4; /* Darker shade on hover */
+        }
+
         #userDecoration {
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 20px;
+            z-index: 0; /* Set z-index to default (0) */
         }
 
         #decoration {
@@ -25,14 +65,18 @@
             width: 512px; /* Resized to 512x512 */
             height: 512px; /* Set the height to maintain aspect ratio */
             margin-top: 10px;
+            border-radius: 50%;
+            border: 5px solid #fff;
         }
     </style>
 </head>
 <body>
 
+    <h1>User Decoration</h1>
+
     <!-- Search bar -->
     <input type="text" id="userSearch" placeholder="Enter User ID">
-    <button onclick="searchUser()">Search</button>
+    <button id="searchButton" onclick="searchUser()">Search</button>
 
     <!-- Display user decoration and profile picture -->
     <div id="userDecoration"></div>
@@ -42,6 +86,10 @@
             // Get user ID from the search bar
             const userId = document.getElementById('userSearch').value;
 
+            // Reset content inside the userDecoration element
+            const userDecorationElement = document.getElementById('userDecoration');
+            userDecorationElement.innerHTML = "";
+
             // Fetch user data from the API
             fetch(`https://decor.fieryflames.dev/api/users/${userId}`)
                 .then(response => response.json())
@@ -50,7 +98,6 @@
                     const decorationHash = data.decorationHash;
 
                     // Display user decoration
-                    const userDecorationElement = document.getElementById('userDecoration');
                     userDecorationElement.innerHTML = `
                         <img id="decoration" src="https://ugc.decor.fieryflames.dev/${decorationHash}.png?animate=true" alt="User Decoration">
                         <img id="profilePicture" src="https://raw.githubusercontent.com/UserPFP/img/main/Avatars/${userId.charAt(0)}/${userId}.gif" alt="Profile Picture">
