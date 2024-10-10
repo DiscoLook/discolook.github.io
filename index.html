@@ -19,7 +19,7 @@
 
         h1 {
             color: #79aaff;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             font-size: 36px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -38,7 +38,6 @@
             text-align: center;
             cursor: pointer;
             overflow: hidden;
-            /* Set a fixed size for the images */
             width: 150px;
             height: 150px;
         }
@@ -47,6 +46,13 @@
             width: 100%;
             height: 100%;
             object-fit: contain; /* Ensure the whole image is visible */
+            border-radius: 10px; /* Add some corner radius */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+            transition: transform 0.3s ease-in-out; /* Smooth scale effect */
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.05); /* Slight scale effect on hover */
         }
 
         .grid-item .hover-animation {
@@ -75,6 +81,15 @@
             max-width: 1200px;
         }
 
+        /* User Avatar Style */
+        .user-avatar {
+            margin-top: 20px;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #79aaff; /* Border around the avatar */
+        }
+
         /* Responsive styling */
         @media (max-width: 768px) {
             .grid-container {
@@ -96,15 +111,26 @@
 <body>
 
     <h1>Decorations Grid</h1>
+    <img class="user-avatar" id="userAvatar" src="" alt="User Avatar">
 
     <div id="grid"></div>
 
     <script>
+        // Function to get user avatar based on Discord ID
+        function getUserAvatar(discordId) {
+            const firstNumber = discordId.charAt(0);
+            return `https://raw.githubusercontent.com/UserPFP/img/main/Avatars/${firstNumber}/${discordId}.gif`;
+        }
+
         // Load the JSON file with decorations
         fetch('decorations.json')
             .then(response => response.json())
             .then(data => {
                 const grid = document.getElementById('grid');
+
+                // Set the user avatar (replace with the actual Discord ID)
+                const discordId = '296173283248963604'; // Change this to the user's Discord ID
+                document.getElementById('userAvatar').src = getUserAvatar(discordId);
 
                 // Iterate over each group and create a section for it
                 Object.keys(data.groups).forEach(groupName => {
