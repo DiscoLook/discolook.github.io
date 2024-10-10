@@ -37,26 +37,19 @@
             position: relative;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border-radius: 12px;
+            transition: transform 0.3s ease-in-out;
             overflow: hidden;
         }
 
-        .grid-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        }
-
         .grid-item img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
+            width: 100%;
+            height: auto;
+            border-radius: 50%; /* Rounded avatars */
             transition: transform 0.3s ease-in-out;
         }
 
         .grid-item:hover img {
-            transform: scale(1.2);
+            transform: scale(1.1); /* Subtle scale effect */
         }
 
         .grid-item .hover-animation {
@@ -92,10 +85,15 @@
             .grid-container {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
+        }
 
-            .grid-item img {
-                width: 100px;
-                height: 100px;
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .group-title {
+                font-size: 20px;
             }
         }
     </style>
