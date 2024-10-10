@@ -71,16 +71,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 614px;
-            z-index: 1;
+            width: 308px; /* Adjusted size for the decoration */
+            z-index: 2; /* Ensure decoration is above profile picture */
         }
 
         #profilePicture {
-            width: 512px;
-            height: 512px;
+            width: 256px; /* Avatar size */
+            height: 256px; /* Maintains aspect ratio */
             margin-top: 10px;
             border-radius: 50%;
             border: none;
+            position: relative; /* Allows absolute positioning of decoration */
+            z-index: 1; /* Ensure profile picture is below decoration */
         }
 
         .downloadButton {
@@ -113,23 +115,33 @@
     <button id="searchButton" onclick="searchUser()">Search</button>
 
     <!-- Display user decoration and profile picture -->
-    <div id="userDecoration"></div>
+    <div id="userDecoration">
+        <img id="decoration" src="" alt="User Decoration" style="display: none;"> <!-- Initially hidden -->
+        <img id="profilePicture" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Profile Picture"> <!-- Placeholder -->
+    </div>
 
     <script>
         function searchUser() {
             const userId = document.getElementById('userSearch').value;
             const userDecorationElement = document.getElementById('userDecoration');
-            userDecorationElement.innerHTML = "";
+            const decorationImage = document.getElementById('decoration');
+            decorationImage.style.display = "none"; // Hide decoration initially
 
             fetch(`https://decor.fieryflames.dev/api/users/${userId}`)
                 .then(response => response.json())
                 .then(data => {
                     const decorationHash = data.decorationHash;
 
-                    userDecorationElement.innerHTML = `
-                        <img id="decoration" src="https://ugc.decor.fieryflames.dev/${decorationHash}.png?animate=true" alt="User Decoration">
-                        <img id="profilePicture" src="https://raw.githubusercontent.com/UserPFP/img/main/Avatars/${userId.charAt(0)}/${userId}.gif" alt="Profile Picture">
-                    `;
+                    decorationImage.src = `https://ugc.decor.fieryflames.dev/${decorationHash}.png?animate=true`;
+                    decorationImage.style.display = "block"; // Show decoration
+
+                    const profilePicture = document.getElementById('profilePicture');
+                    profilePicture.src = `https://raw.githubusercontent.com/UserPFP/img/main/Avatars/${userId.charAt(0)}/${userId}.gif`; // Set profile picture
+                    profilePicture.onerror = () => {
+                        profilePicture.src = 'https://cdn.discordapp.com/embed/avatars/0.png'; // Placeholder on error
+                    };
+
+                    userDecorationElement.appendChild(decorationImage); // Add decoration image
                 })
                 .catch(error => console.error('Error:', error));
         }
