@@ -3,148 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiscoLook</title>
-    <link rel="icon" type="image/png" href="https://i.ibb.co/4ZxkRGs/Adobe-Express-20240114-1109270-1.png">
+    <title>Decoration Grid</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #222;
             color: #fff;
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            padding: 20px;
         }
 
         h1 {
             color: #5865F2;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
         }
 
-        #logo {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
         }
 
-        #userSearch {
-            padding: 10px;
-            font-size: 16px;
-            margin-right: 10px;
-            z-index: 2;
-            background-color: #333;
-            color: #fff;
-            border: none;
-        }
-
-        #searchButton {
-            padding: 10px;
-            font-size: 16px;
-            background-color: #5865F2;
-            color: #fff;
-            cursor: pointer;
-            border: none;
-            transition: background-color 0.3s ease;
-            border-radius: 5px;
-        }
-
-        #searchButton:hover {
-            background-color: #4E5CB5;
-        }
-
-        #userDecoration {
+        .grid-item {
             position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 32px;
-            z-index: 0;
+            text-align: center;
         }
 
-        #decoration {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 308px; /* Adjusted size for the decoration */
-            z-index: 2; /* Ensure decoration is above profile picture */
-        }
-
-        #profilePicture {
-            width: 256px; /* Avatar size */
-            height: 256px; /* Maintains aspect ratio */
-            margin-top: 10px;
+        .grid-item img {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            border: none;
-            position: relative; /* Allows absolute positioning of decoration */
-            z-index: 1; /* Ensure profile picture is below decoration */
+            transition: transform 0.3s ease-in-out;
         }
 
-        .downloadButton {
+        .grid-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .grid-item .hover-animation {
             display: none;
-            margin-top: 20px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #5865F2;
-            color: #fff;
-            cursor: pointer;
-            border: none;
-            transition: background-color 0.3s ease;
-            border-radius: 5px;
         }
 
-        .downloadButton:hover {
-            background-color: #4E5CB5;
+        .grid-item:hover .hover-animation {
+            display: inline-block;
+        }
+
+        .group-title {
+            margin-top: 30px;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
 
-    <h1>
-        <img id="logo" src="https://i.ibb.co/4ZxkRGs/Adobe-Express-20240114-1109270-1.png" alt="DiscoLook Logo">
-        DiscoLook
-    </h1>
+    <h1>Decorations Grid</h1>
 
-    <!-- Search bar -->
-    <input type="text" id="userSearch" placeholder="Enter User ID">
-    <button id="searchButton" onclick="searchUser()">Search</button>
-
-    <!-- Display user decoration and profile picture -->
-    <div id="userDecoration">
-        <img id="decoration" src="" alt="User Decoration" style="display: none;"> <!-- Initially hidden -->
-        <img id="profilePicture" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Profile Picture"> <!-- Placeholder -->
-    </div>
+    <div id="grid"></div>
 
     <script>
-        function searchUser() {
-            const userId = document.getElementById('userSearch').value;
-            const userDecorationElement = document.getElementById('userDecoration');
-            const decorationImage = document.getElementById('decoration');
-            decorationImage.style.display = "none"; // Hide decoration initially
+        // Load the JSON file with decorations
+        fetch('decorations.json')
+            .then(response => response.json())
+            .then(data => {
+                const grid = document.getElementById('grid');
 
-            fetch(`https://decor.fieryflames.dev/api/users/${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const decorationHash = data.decorationHash;
+                // Iterate over each group and create a section for it
+                Object.keys(data.groups).forEach(groupName => {
+                    const group = data.groups[groupName];
 
-                    decorationImage.src = `https://ugc.decor.fieryflames.dev/${decorationHash}.png?animate=true`;
-                    decorationImage.style.display = "block"; // Show decoration
+                    // Create a group title
+                    const groupTitle = document.createElement('h2');
+                    groupTitle.textContent = groupName.charAt(0).toUpperCase() + groupName.slice(1);
+                    groupTitle.className = 'group-title';
+                    grid.appendChild(groupTitle);
 
-                    const profilePicture = document.getElementById('profilePicture');
-                    profilePicture.src = `https://raw.githubusercontent.com/UserPFP/img/main/Avatars/${userId.charAt(0)}/${userId}.gif`; // Set profile picture
-                    profilePicture.onerror = () => {
-                        profilePicture.src = 'https://cdn.discordapp.com/embed/avatars/0.png'; // Placeholder on error
-                    };
+                    // Create a grid container
+                    const gridContainer = document.createElement('div');
+                    gridContainer.className = 'grid-container';
 
-                    userDecorationElement.appendChild(decorationImage); // Add decoration image
-                })
-                .catch(error => console.error('Error:', error));
-        }
+                    // Iterate over decorations in the group
+                    group.forEach(decoration => {
+                        const gridItem = document.createElement('div');
+                        gridItem.className = 'grid-item';
+
+                        // Create the avatar image with hover effect
+                        gridItem.innerHTML = `
+                            <img src="${decoration.url}" alt="${decoration.name}">
+                            <div class="hover-animation">${decoration.name}</div>
+                        `;
+
+                        gridContainer.appendChild(gridItem);
+                    });
+
+                    grid.appendChild(gridContainer);
+                });
+            })
+            .catch(error => console.error('Error loading JSON:', error));
     </script>
 
 </body>
