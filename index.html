@@ -25,6 +25,33 @@
             letter-spacing: 2px;
         }
 
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container input {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            width: 250px;
+            margin-right: 10px;
+        }
+
+        .input-container button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #79aaff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #6496f3; /* Darker shade on hover */
+        }
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -107,6 +134,10 @@
 <body>
 
     <h1>Decorations Grid</h1>
+    <div class="input-container">
+        <input type="text" id="discordIdInput" placeholder="Enter Discord ID" />
+        <button id="loadAvatarButton">Load Avatar</button>
+    </div>
     <img class="user-avatar" id="userAvatar" src="" alt="User Avatar">
 
     <div id="grid"></div>
@@ -123,10 +154,6 @@
             .then(response => response.json())
             .then(data => {
                 const grid = document.getElementById('grid');
-
-                // Set the user avatar (replace with the actual Discord ID)
-                const discordId = '296173283248963604'; // Change this to the user's Discord ID
-                document.getElementById('userAvatar').src = getUserAvatar(discordId);
 
                 // Iterate over each group and create a section for it
                 Object.keys(data.groups).forEach(groupName => {
@@ -160,6 +187,12 @@
                 });
             })
             .catch(error => console.error('Error loading JSON:', error));
+
+        // Event listener for the button
+        document.getElementById('loadAvatarButton').addEventListener('click', () => {
+            const discordId = document.getElementById('discordIdInput').value;
+            document.getElementById('userAvatar').src = getUserAvatar(discordId);
+        });
     </script>
 
 </body>
