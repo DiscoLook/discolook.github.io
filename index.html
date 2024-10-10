@@ -37,19 +37,17 @@
             position: relative;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s ease-in-out;
             overflow: hidden;
+            /* Set a fixed size for the images */
+            width: 150px;
+            height: 150px;
         }
 
         .grid-item img {
             width: 100%;
-            height: auto;
-            /* Removed border-radius to avoid circular cropping */
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .grid-item:hover img {
-            transform: scale(1.1); /* Subtle scale effect */
+            height: 100%;
+            object-fit: contain; /* Ensure the whole image is visible */
+            transition: none; /* Removed zoom effect */
         }
 
         .grid-item .hover-animation {
