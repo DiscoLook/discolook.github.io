@@ -1,0 +1,28 @@
+{
+  "groups": {
+    "anime": [
+      {
+        "name": "Asta (Black Clover)",
+        "url": "https://ugc.decor.fieryflames.dev/0faf007fbdb70876814e4c77502e0196.png?animate=true",
+        "creator": "FoxStorm1",
+        "id": "789872551731527690"
+      }
+    ],
+    "seasonal": [
+      {
+        "name": "Candlelit Phantoms",
+        "url": "https://ugc.decor.fieryflames.dev/5f9b45b9cfbbc81433398b13403b475c.png?animate=true",
+        "creator": "FoxStorm1",
+        "id": "789872551731527690"
+      }
+    ],
+    "custom": [
+      {
+        "name": "Lego Ring",
+        "url": "https://ugc.decor.fieryflames.dev/490ccd59f4f4fc41bbde89a6f66e5c6d.png?animate=true",
+        "creator": "FoxStorm1",
+        "id": "789872551731527690"
+      }
+    ]
+  }
+}
