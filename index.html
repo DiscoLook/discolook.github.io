@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decoration Grid</title>
     <style>
-        /* Styling for the page */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #1e1e2e;
@@ -49,13 +48,13 @@
         }
 
         .input-container button:hover {
-            background-color: #6496f3; /* Darker shade on hover */
+            background-color: #6496f3;
         }
 
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 30px;
+            gap: 20px;
             width: 100%;
             max-width: 1200px;
         }
@@ -72,10 +71,9 @@
         .grid-item img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Ensure the whole image is visible */
-            border-radius: 10px; /* Add some corner radius */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect */
-            /* Removed hover scaling effect */
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .grid-item .hover-animation {
@@ -83,37 +81,39 @@
             color: #f5f5f7;
             font-weight: bold;
             opacity: 0;
-            transform: translateY(10px); /* Start lower */
+            transform: translateY(10px);
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
         }
 
         .grid-item:hover .hover-animation {
-            opacity: 1; /* Fade in */
-            transform: translateY(0); /* Move to original position */
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .group-title {
-            margin-top: 50px;
+            margin-top: 40px;
             font-size: 28px;
             color: #79aaff;
             letter-spacing: 1px;
             border-bottom: 2px solid #79aaff;
             padding-bottom: 10px;
-            text-align: center;
             width: 100%;
             max-width: 1200px;
+            text-align: center;
         }
 
-        /* User Avatar Style */
         .user-avatar {
             margin-top: 20px;
             border-radius: 50%;
-            width: 512px; /* Updated to match the specified dimensions */
-            height: 512px; /* Updated to match the specified dimensions */
-            border: none; /* Removed the border */
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
         }
 
-        /* Responsive styling */
         @media (max-width: 768px) {
             .grid-container {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -143,38 +143,31 @@
     <div id="grid"></div>
 
     <script>
-        // Function to get user avatar based on Discord ID
         function getUserAvatar(discordId) {
             const firstNumber = discordId.charAt(0);
             return `https://raw.githubusercontent.com/UserPFP/img/main/Avatars/${firstNumber}/${discordId}.gif`;
         }
 
-        // Load the JSON file with decorations
         fetch('decorations.json')
             .then(response => response.json())
             .then(data => {
                 const grid = document.getElementById('grid');
 
-                // Iterate over each group and create a section for it
                 Object.keys(data.groups).forEach(groupName => {
                     const group = data.groups[groupName];
 
-                    // Create a group title
                     const groupTitle = document.createElement('h2');
                     groupTitle.textContent = groupName.charAt(0).toUpperCase() + groupName.slice(1);
                     groupTitle.className = 'group-title';
                     grid.appendChild(groupTitle);
 
-                    // Create a grid container
                     const gridContainer = document.createElement('div');
                     gridContainer.className = 'grid-container';
 
-                    // Iterate over decorations in the group
                     group.forEach(decoration => {
                         const gridItem = document.createElement('div');
                         gridItem.className = 'grid-item';
 
-                        // Create the avatar image with hover effect
                         gridItem.innerHTML = `
                             <img src="${decoration.url}" alt="${decoration.name}">
                             <div class="hover-animation">${decoration.name}</div>
@@ -188,10 +181,20 @@
             })
             .catch(error => console.error('Error loading JSON:', error));
 
-        // Event listener for the button
         document.getElementById('loadAvatarButton').addEventListener('click', () => {
             const discordId = document.getElementById('discordIdInput').value;
-            document.getElementById('userAvatar').src = getUserAvatar(discordId);
+            const avatarUrl = getUserAvatar(discordId);
+            const userAvatar = document.getElementById('userAvatar');
+
+            // Handle if Discord ID is incorrect or avatar can't be loaded
+            fetch(avatarUrl).then(response => {
+                if (response.ok) {
+                    userAvatar.src = avatarUrl;
+                } else {
+                    userAvatar.src = ''; // Set to a default or error image
+                    alert('Avatar not found');
+                }
+            });
         });
     </script>
 
