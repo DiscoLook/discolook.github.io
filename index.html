@@ -49,24 +49,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .grid-item .hover-animation {
-            font-size: 16px;
-            color: #f5f5f7;
-            font-weight: bold;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-        }
-
-        .grid-item:hover .hover-animation {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         .group-title {
             margin-top: 40px;
             font-size: 28px;
@@ -77,18 +59,6 @@
             width: 100%;
             max-width: 1200px;
             text-align: center;
-        }
-
-        .download-link {
-            display: block;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #79aaff;
-            text-decoration: none;
-        }
-
-        .download-link:hover {
-            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
@@ -115,39 +85,54 @@
     <div id="grid"></div>
 
     <script>
-        fetch('decorations.json')
-            .then(response => response.json())
-            .then(data => {
-                const grid = document.getElementById('grid');
+        // Function to load decorations from the JSON file
+        function loadDecorations() {
+            fetch('decorations.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load decorations.json');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const grid = document.getElementById('grid');
+                    grid.innerHTML = ''; // Clear previous content
 
-                Object.keys(data.groups).forEach(groupName => {
-                    const group = data.groups[groupName];
+                    Object.keys(data.groups).forEach(groupName => {
+                        const group = data.groups[groupName];
 
-                    const groupTitle = document.createElement('h2');
-                    groupTitle.textContent = groupName.charAt(0).toUpperCase() + groupName.slice(1);
-                    groupTitle.className = 'group-title';
-                    grid.appendChild(groupTitle);
+                        // Create and append group title
+                        const groupTitle = document.createElement('h2');
+                        groupTitle.textContent = groupName.charAt(0).toUpperCase() + groupName.slice(1);
+                        groupTitle.className = 'group-title';
+                        grid.appendChild(groupTitle);
 
-                    const gridContainer = document.createElement('div');
-                    gridContainer.className = 'grid-container';
+                        // Create a container for the group's decorations
+                        const gridContainer = document.createElement('div');
+                        gridContainer.className = 'grid-container';
 
-                    group.forEach(decoration => {
-                        const gridItem = document.createElement('div');
-                        gridItem.className = 'grid-item';
+                        // Create grid items for each decoration
+                        group.forEach(decoration => {
+                            const gridItem = document.createElement('div');
+                            gridItem.className = 'grid-item';
 
-                        gridItem.innerHTML = `
-                            <img src="${decoration.url}" alt="${decoration.name}">
-                            <div class="hover-animation">${decoration.name}</div>
-                            <a href="${decoration.url}" download="${decoration.name}" class="download-link">Download</a>
-                        `;
+                            gridItem.innerHTML = `
+                                <img src="${decoration.url}" alt="${decoration.name}">
+                            `;
 
-                        gridContainer.appendChild(gridItem);
+                            gridContainer.appendChild(gridItem);
+                        });
+
+                        grid.appendChild(gridContainer);
                     });
-
-                    grid.appendChild(gridContainer);
+                })
+                .catch(error => {
+                    console.error('Error loading decorations:', error);
                 });
-            })
-            .catch(error => console.error('Error loading JSON:', error));
+        }
+
+        // Load decorations when the page loads
+        window.addEventListener('load', loadDecorations);
     </script>
 
 </body>
