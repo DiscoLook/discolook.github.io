@@ -164,15 +164,17 @@
                                     });
                             });
 
-                            // Create the creator link
-                            const creatorLink = document.createElement('a');
-                            creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
-                            creatorLink.textContent = decoration.creator;
-                            creatorLink.className = 'creator-link';
-                            creatorLink.target = '_blank'; // Open in new tab
+                            // Create the creator link if the fields are available
+                            if (decoration.id && decoration.creator) {
+                                const creatorLink = document.createElement('a');
+                                creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
+                                creatorLink.textContent = decoration.creator;
+                                creatorLink.className = 'creator-link';
+                                creatorLink.target = '_blank'; // Open in new tab
 
-                            // Append the creator link to the grid item
-                            gridItem.appendChild(creatorLink);
+                                // Append the creator link to the grid item
+                                gridItem.appendChild(creatorLink);
+                            }
 
                             gridContainer.appendChild(gridItem);
                         });
