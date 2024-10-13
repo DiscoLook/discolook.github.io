@@ -137,6 +137,18 @@
                             img.alt = decoration.name;
                             gridItem.appendChild(img);
 
+                            // Create the creator link
+                            if (decoration.id && decoration.creator) {
+                                const creatorLink = document.createElement('a');
+                                creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
+                                creatorLink.textContent = decoration.creator;
+                                creatorLink.className = 'creator-link';
+                                creatorLink.target = '_blank'; // Open in new tab
+
+                                // Append the creator link to the grid item
+                                gridItem.appendChild(creatorLink);
+                            }
+
                             // Add click event listener to trigger download
                             gridItem.addEventListener('click', () => {
                                 fetch(decoration.url)
@@ -163,18 +175,6 @@
                                         console.error('Error downloading image:', error);
                                     });
                             });
-
-                            // Create the creator link
-                            if (decoration.id && decoration.creator) {
-                                const creatorLink = document.createElement('a');
-                                creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
-                                creatorLink.textContent = decoration.creator;
-                                creatorLink.className = 'creator-link';
-                                creatorLink.target = '_blank'; // Open in new tab
-
-                                // Append the creator link to the grid item
-                                gridItem.appendChild(creatorLink);
-                            }
 
                             gridContainer.appendChild(gridItem);
                         });
