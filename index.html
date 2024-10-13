@@ -100,8 +100,6 @@
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data); // Debugging: Output fetched JSON to the console
-
                     const grid = document.getElementById('grid');
                     grid.innerHTML = ''; // Clear previous content
 
@@ -131,7 +129,7 @@
                             gridItem.addEventListener('click', () => {
                                 const link = document.createElement('a');
                                 const extension = getFileExtension(decoration.url); // Get file extension
-
+                                
                                 // Set the href to the image URL
                                 link.href = decoration.url;
 
@@ -139,7 +137,9 @@
                                 link.download = `${decoration.name}.${extension}`; 
 
                                 // Programmatically trigger the download
-                                link.click();
+                                document.body.appendChild(link); // Append link to the body
+                                link.click(); // Trigger download
+                                document.body.removeChild(link); // Remove link after downloading
                             });
 
                             gridContainer.appendChild(gridItem);
