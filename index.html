@@ -157,29 +157,32 @@
                                 gridItem.appendChild(creatorLink);
                             };
 
-                            gridItem.addEventListener('click', () => {
-                                fetch(decoration.url)
-                                    .then(response => {
-                                        if (!response.ok) {
-                                            throw new Error('Failed to fetch image');
-                                        }
-                                        return response.blob();
-                                    })
-                                    .then(blob => {
-                                        const url = window.URL.createObjectURL(blob);
-                                        const a = document.createElement('a');
-                                        const extension = getFileExtension(decoration.url); 
+                            gridItem.addEventListener('click', (event) => {
+                                // Check if the click target is not the creator link
+                                if (event.target !== creatorLink) {
+                                    fetch(decoration.url)
+                                        .then(response => {
+                                            if (!response.ok) {
+                                                throw new Error('Failed to fetch image');
+                                            }
+                                            return response.blob();
+                                        })
+                                        .then(blob => {
+                                            const url = window.URL.createObjectURL(blob);
+                                            const a = document.createElement('a');
+                                            const extension = getFileExtension(decoration.url);
 
-                                        a.href = url;
-                                        a.download = `${decoration.name}.${extension}`;
-                                        document.body.appendChild(a);
-                                        a.click();
-                                        a.remove();
-                                        window.URL.revokeObjectURL(url);
-                                    })
-                                    .catch(error => {
-                                        console.error('Error downloading image:', error);
-                                    });
+                                            a.href = url;
+                                            a.download = `${decoration.name}.${extension}`;
+                                            document.body.appendChild(a);
+                                            a.click();
+                                            a.remove();
+                                            window.URL.revokeObjectURL(url);
+                                        })
+                                        .catch(error => {
+                                            console.error('Error downloading image:', error);
+                                        });
+                                }
                             });
 
                             gridContainer.appendChild(gridItem);
