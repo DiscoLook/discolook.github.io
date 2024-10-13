@@ -82,6 +82,23 @@
             text-align: center;
         }
 
+        /* Preview Image Styles */
+        .preview-image {
+            position: absolute;
+            top: 0;
+            left: 110%; /* Position it to the right of the grid item */
+            width: 150px; /* Fixed width for preview */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            display: none; /* Initially hidden */
+            z-index: 10; /* Ensure it appears above other elements */
+        }
+
+        .grid-item:hover .preview-image {
+            display: block; /* Show preview on hover */
+        }
+
         @media (max-width: 768px) {
             .grid-container {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -141,6 +158,11 @@
                             img.src = decoration.url;
                             img.alt = decoration.name;
 
+                            const previewImg = document.createElement('img');
+                            previewImg.src = decoration.preview || decoration.url; // Fallback to decoration URL if no preview
+                            previewImg.alt = `${decoration.name} Preview`;
+                            previewImg.className = 'preview-image';
+
                             const decorationName = document.createElement('div');
                             decorationName.textContent = decoration.name;
                             decorationName.className = 'decoration-name';
@@ -153,6 +175,7 @@
 
                             img.onload = () => {
                                 gridItem.appendChild(img);
+                                gridItem.appendChild(previewImg); // Add the preview image to the grid item
                                 gridItem.appendChild(decorationName);
                                 gridItem.appendChild(creatorLink);
                             };
