@@ -53,7 +53,26 @@
             height: 100px; /* Fixed height for uniformity */
             object-fit: contain;
             border-radius: 12px 12px 0 0; /* Rounded top corners */
-            transition: opacity 0.2s; /* Smooth transition for image swap */
+            transition: opacity 0.3s; /* Smooth transition for fading */
+        }
+
+        .grid-item img.preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100px;
+            border-radius: 12px 12px 0 0; /* Rounded top corners */
+            transition: opacity 0.3s; /* Smooth transition for fading */
+        }
+
+        .grid-item:hover img.main {
+            opacity: 0; /* Fade out main image */
+        }
+
+        .grid-item:hover img.preview {
+            opacity: 1; /* Fade in preview image */
         }
 
         .creator-link {
@@ -81,21 +100,6 @@
             border-bottom: 2px solid #00ccff; /* Border color matches */
             padding-bottom: 10px;
             text-align: center;
-        }
-
-        /* Hide preview image */
-        .preview-image {
-            display: none; /* Initially hidden */
-        }
-
-        /* Show preview image on hover */
-        .grid-item:hover img.normal {
-            opacity: 0; /* Fade out the normal image */
-        }
-
-        .grid-item:hover img.preview {
-            display: block; /* Show the preview image */
-            opacity: 1; /* Fade in the preview image */
         }
 
         @media (max-width: 768px) {
@@ -153,18 +157,15 @@
                             const gridItem = document.createElement('div');
                             gridItem.className = 'grid-item';
 
-                            // Normal decoration image
-                            const img = document.createElement('img');
-                            img.src = decoration.url;
-                            img.alt = decoration.name;
-                            img.className = 'normal'; // Add class for normal image
+                            const mainImg = document.createElement('img');
+                            mainImg.src = decoration.url;
+                            mainImg.alt = decoration.name;
+                            mainImg.className = 'main';
 
-                            // Preview image
                             const previewImg = document.createElement('img');
-                            previewImg.src = decoration.preview || decoration.url; // Fallback to decoration URL if no preview
-                            previewImg.alt = `${decoration.name} Preview`;
-                            previewImg.className = 'preview'; // Add class for preview image
-                            previewImg.style.display = 'none'; // Initially hide the preview image
+                            previewImg.src = decoration.preview || ''; // Use preview image if exists
+                            previewImg.alt = decoration.name + ' Preview';
+                            previewImg.className = 'preview';
 
                             const decorationName = document.createElement('div');
                             decorationName.textContent = decoration.name;
@@ -176,13 +177,13 @@
                             creatorLink.className = 'creator-link';
                             creatorLink.target = '_blank'; 
 
-                            img.onload = () => {
-                                gridItem.appendChild(img);
-                                gridItem.appendChild(previewImg); // Add the preview image to the grid item
-                                gridItem.appendChild(decorationName);
-                                gridItem.appendChild(creatorLink);
-                            };
+                            // Append images, name, and link to grid item
+                            gridItem.appendChild(mainImg);
+                            gridItem.appendChild(previewImg);
+                            gridItem.appendChild(decorationName);
+                            gridItem.appendChild(creatorLink);
 
+                            // Click event for downloading the main image
                             gridItem.addEventListener('click', (event) => {
                                 // Check if the click target is not the creator link
                                 if (event.target !== creatorLink) {
