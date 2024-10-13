@@ -87,7 +87,7 @@
     <script>
         // Function to load decorations from the JSON file
         function loadDecorations() {
-            fetch('decorations.json')
+            fetch('decorations.json?timestamp=' + new Date().getTime()) // Cache busting to prevent stale data
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to load decorations.json');
@@ -95,6 +95,8 @@
                     return response.json();
                 })
                 .then(data => {
+                    console.log(data); // Debugging: Output fetched JSON to the console
+
                     const grid = document.getElementById('grid');
                     grid.innerHTML = ''; // Clear previous content
 
