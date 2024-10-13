@@ -49,6 +49,17 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
+        .creator-link {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #79aaff;
+            text-decoration: none;
+        }
+
+        .creator-link:hover {
+            text-decoration: underline;
+        }
+
         .group-title {
             margin-top: 40px;
             font-size: 28px;
@@ -85,14 +96,9 @@
     <div id="grid"></div>
 
     <script>
-        // Function to get the file extension from a URL
-        function getFileExtension(url) {
-            return url.split('.').pop().split(/\#|\?/)[0];
-        }
-
         // Function to load decorations from the JSON file
         function loadDecorations() {
-            fetch('decorations.json?timestamp=' + new Date().getTime()) // Cache busting
+            fetch('decorations.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to load decorations.json');
@@ -121,37 +127,13 @@
                             const gridItem = document.createElement('div');
                             gridItem.className = 'grid-item';
 
-                            const img = document.createElement('img');
-                            img.src = decoration.url;
-                            img.alt = decoration.name;
-                            gridItem.appendChild(img);
-
-                            // Add click event listener to trigger download
-                            gridItem.addEventListener('click', () => {
-                                fetch(decoration.url)
-                                    .then(response => {
-                                        if (!response.ok) {
-                                            throw new Error('Failed to fetch image');
-                                        }
-                                        return response.blob();
-                                    })
-                                    .then(blob => {
-                                        const url = window.URL.createObjectURL(blob);
-                                        const a = document.createElement('a');
-                                        const extension = getFileExtension(decoration.url); // Get file extension
-
-                                        // Use the decoration name + correct extension for the download filename
-                                        a.href = url;
-                                        a.download = `${decoration.name}.${extension}`;
-                                        document.body.appendChild(a);
-                                        a.click();
-                                        a.remove();
-                                        window.URL.revokeObjectURL(url); // Clean up the URL object
-                                    })
-                                    .catch(error => {
-                                        console.error('Error downloading image:', error);
-                                    });
-                            });
+                            // Create the image and creator link
+                            gridItem.innerHTML = `
+                                <img src="${decoration.url}" alt="${decoration.name}" onclick="downloadImage('${decoration.url}', '${decoration.name}')">
+                                <div>
+                                    <a href="https://discordapp.com/users/${decoration.id}" class="creator-link" target="_blank">${decoration.creator}</a>
+                                </div>
+                            `;
 
                             gridContainer.appendChild(gridItem);
                         });
@@ -162,6 +144,16 @@
                 .catch(error => {
                     console.error('Error loading decorations:', error);
                 });
+        }
+
+        // Function to download an image
+        function downloadImage(url, name) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${name}.png`; // Use decoration name for download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         // Load decorations when the page loads
