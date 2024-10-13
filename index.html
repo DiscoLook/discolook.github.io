@@ -145,25 +145,29 @@
                             const img = document.createElement('img');
                             img.src = decoration.url;
                             img.alt = decoration.name;
+
+                            // Add image load event listener
+                            img.onload = () => {
+                                // Create a decoration name element
+                                const decorationName = document.createElement('div');
+                                decorationName.textContent = decoration.name;
+                                decorationName.className = 'decoration-name';
+                                gridItem.appendChild(decorationName);
+
+                                // Create the creator link
+                                if (decoration.id && decoration.creator) {
+                                    const creatorLink = document.createElement('a');
+                                    creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
+                                    creatorLink.textContent = decoration.creator;
+                                    creatorLink.className = 'creator-link';
+                                    creatorLink.target = '_blank'; // Open in new tab
+
+                                    // Append the creator link to the grid item
+                                    gridItem.appendChild(creatorLink);
+                                }
+                            };
+
                             gridItem.appendChild(img);
-
-                            // Create a decoration name element
-                            const decorationName = document.createElement('div');
-                            decorationName.textContent = decoration.name;
-                            decorationName.className = 'decoration-name';
-                            gridItem.appendChild(decorationName);
-
-                            // Create the creator link
-                            if (decoration.id && decoration.creator) {
-                                const creatorLink = document.createElement('a');
-                                creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
-                                creatorLink.textContent = decoration.creator;
-                                creatorLink.className = 'creator-link';
-                                creatorLink.target = '_blank'; // Open in new tab
-
-                                // Append the creator link to the grid item
-                                gridItem.appendChild(creatorLink);
-                            }
 
                             // Add click event listener to trigger download
                             gridItem.addEventListener('click', () => {
