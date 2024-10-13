@@ -24,17 +24,19 @@
         "id": "789872551731527690"
       }
     ],
-    "SAR": {
-      "miniPets": [
-        {
-          "name": "Mini Skunk",
-          "url": "https://i.imgur.com/CJl6SaC.png"
-        },
-        {
-          "name": "Mini Red Panda",
-          "url": "https://i.imgur.com/oweFSPA.png"
-        }
-      ]
-    }
+    "super_animal_royale": [
+      {
+        "name": "Mini Skunk",
+        "url": "https://i.imgur.com/CJl6SaC.png",
+        "creator": "SARCreator",
+        "id": "sar001"
+      },
+      {
+        "name": "Mini Red Panda",
+        "url": "https://i.imgur.com/oweFSPA.png",
+        "creator": "SARCreator",
+        "id": "sar002"
+      }
+    ]
   }
 }
