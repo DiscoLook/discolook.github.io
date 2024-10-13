@@ -87,7 +87,7 @@
     <script>
         // Function to load decorations from the JSON file
         function loadDecorations() {
-            fetch('decorations.json?timestamp=' + new Date().getTime()) // Cache busting to prevent stale data
+            fetch('decorations.json?timestamp=' + new Date().getTime()) // Cache busting
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to load decorations.json');
@@ -121,6 +121,14 @@
                             gridItem.innerHTML = `
                                 <img src="${decoration.url}" alt="${decoration.name}">
                             `;
+
+                            // Add click event listener to trigger download
+                            gridItem.addEventListener('click', () => {
+                                const link = document.createElement('a');
+                                link.href = decoration.url;
+                                link.download = decoration.name + '.png'; // Sets the file name
+                                link.click();
+                            });
 
                             gridContainer.appendChild(gridItem);
                         });
