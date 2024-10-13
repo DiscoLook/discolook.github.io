@@ -53,6 +53,7 @@
             height: 100px; /* Fixed height for uniformity */
             object-fit: contain;
             border-radius: 12px 12px 0 0; /* Rounded top corners */
+            transition: opacity 0.2s; /* Smooth transition for image swap */
         }
 
         .creator-link {
@@ -82,21 +83,19 @@
             text-align: center;
         }
 
-        /* Preview Image Styles */
+        /* Hide preview image */
         .preview-image {
-            position: absolute;
-            top: 0;
-            left: 110%; /* Position it to the right of the grid item */
-            width: 150px; /* Fixed width for preview */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
             display: none; /* Initially hidden */
-            z-index: 10; /* Ensure it appears above other elements */
         }
 
-        .grid-item:hover .preview-image {
-            display: block; /* Show preview on hover */
+        /* Show preview image on hover */
+        .grid-item:hover img.normal {
+            opacity: 0; /* Fade out the normal image */
+        }
+
+        .grid-item:hover img.preview {
+            display: block; /* Show the preview image */
+            opacity: 1; /* Fade in the preview image */
         }
 
         @media (max-width: 768px) {
@@ -154,14 +153,18 @@
                             const gridItem = document.createElement('div');
                             gridItem.className = 'grid-item';
 
+                            // Normal decoration image
                             const img = document.createElement('img');
                             img.src = decoration.url;
                             img.alt = decoration.name;
+                            img.className = 'normal'; // Add class for normal image
 
+                            // Preview image
                             const previewImg = document.createElement('img');
                             previewImg.src = decoration.preview || decoration.url; // Fallback to decoration URL if no preview
                             previewImg.alt = `${decoration.name} Preview`;
-                            previewImg.className = 'preview-image';
+                            previewImg.className = 'preview'; // Add class for preview image
+                            previewImg.style.display = 'none'; // Initially hide the preview image
 
                             const decorationName = document.createElement('div');
                             decorationName.textContent = decoration.name;
