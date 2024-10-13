@@ -128,19 +128,29 @@
 
                             // Add click event listener to trigger download
                             gridItem.addEventListener('click', () => {
-                                const link = document.createElement('a');
-                                const extension = getFileExtension(decoration.url); // Get file extension
+                                fetch(decoration.url)
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to fetch image');
+                                        }
+                                        return response.blob();
+                                    })
+                                    .then(blob => {
+                                        const url = window.URL.createObjectURL(blob);
+                                        const a = document.createElement('a');
+                                        const extension = getFileExtension(decoration.url); // Get file extension
 
-                                // Set the href to the image URL
-                                link.href = decoration.url;
-
-                                // Use the decoration name + correct extension for the download filename
-                                link.download = `${decoration.name}.${extension}`;
-
-                                // Append to the body and trigger click
-                                document.body.appendChild(link);
-                                link.click(); // Trigger download
-                                document.body.removeChild(link); // Remove link after downloading
+                                        // Use the decoration name + correct extension for the download filename
+                                        a.href = url;
+                                        a.download = `${decoration.name}.${extension}`;
+                                        document.body.appendChild(a);
+                                        a.click();
+                                        a.remove();
+                                        window.URL.revokeObjectURL(url); // Clean up the URL object
+                                    })
+                                    .catch(error => {
+                                        console.error('Error downloading image:', error);
+                                    });
                             });
 
                             gridContainer.appendChild(gridItem);
