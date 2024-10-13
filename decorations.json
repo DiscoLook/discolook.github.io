@@ -23,6 +23,18 @@
         "creator": "FoxStorm1",
         "id": "789872551731527690"
       }
-    ]
+    ],
+    "SAR": {
+      "miniPets": [
+        {
+          "name": "Mini Skunk",
+          "url": "https://i.imgur.com/CJl6SaC.png"
+        },
+        {
+          "name": "Mini Red Panda",
+          "url": "https://i.imgur.com/oweFSPA.png"
+        }
+      ]
+    }
   }
 }
