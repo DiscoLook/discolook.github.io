@@ -85,6 +85,11 @@
     <div id="grid"></div>
 
     <script>
+        // Function to get the file extension from a URL
+        function getFileExtension(url) {
+            return url.split('.').pop().split(/\#|\?/)[0];
+        }
+
         // Function to load decorations from the JSON file
         function loadDecorations() {
             fetch('decorations.json?timestamp=' + new Date().getTime()) // Cache busting
@@ -125,8 +130,15 @@
                             // Add click event listener to trigger download
                             gridItem.addEventListener('click', () => {
                                 const link = document.createElement('a');
+                                const extension = getFileExtension(decoration.url); // Get file extension
+
+                                // Set the href to the image URL
                                 link.href = decoration.url;
-                                link.download = decoration.name + '.png'; // Sets the file name
+
+                                // Use the decoration name + correct extension for the download filename
+                                link.download = `${decoration.name}.${extension}`; 
+
+                                // Programmatically trigger the download
                                 link.click();
                             });
 
