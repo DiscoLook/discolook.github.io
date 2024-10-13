@@ -24,33 +24,6 @@
             letter-spacing: 2px;
         }
 
-        .input-container {
-            margin-bottom: 20px;
-        }
-
-        .input-container input {
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            width: 250px;
-            margin-right: 10px;
-        }
-
-        .input-container button {
-            padding: 10px 15px;
-            font-size: 16px;
-            background-color: #79aaff;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .input-container button:hover {
-            background-color: #6496f3;
-        }
-
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -106,12 +79,16 @@
             text-align: center;
         }
 
-        .user-avatar {
-            margin-top: 20px;
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
+        .download-link {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #79aaff;
+            text-decoration: none;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
@@ -134,20 +111,10 @@
 <body>
 
     <h1>Decorations Grid</h1>
-    <div class="input-container">
-        <input type="text" id="discordIdInput" placeholder="Enter Discord ID" />
-        <button id="loadAvatarButton">Load Avatar</button>
-    </div>
-    <img class="user-avatar" id="userAvatar" src="" alt="User Avatar">
 
     <div id="grid"></div>
 
     <script>
-        function getUserAvatar(discordId) {
-            const firstNumber = discordId.charAt(0);
-            return `https://raw.githubusercontent.com/UserPFP/img/main/Avatars/${firstNumber}/${discordId}.gif`;
-        }
-
         fetch('decorations.json')
             .then(response => response.json())
             .then(data => {
@@ -171,6 +138,7 @@
                         gridItem.innerHTML = `
                             <img src="${decoration.url}" alt="${decoration.name}">
                             <div class="hover-animation">${decoration.name}</div>
+                            <a href="${decoration.url}" download="${decoration.name}" class="download-link">Download</a>
                         `;
 
                         gridContainer.appendChild(gridItem);
@@ -180,22 +148,6 @@
                 });
             })
             .catch(error => console.error('Error loading JSON:', error));
-
-        document.getElementById('loadAvatarButton').addEventListener('click', () => {
-            const discordId = document.getElementById('discordIdInput').value;
-            const avatarUrl = getUserAvatar(discordId);
-            const userAvatar = document.getElementById('userAvatar');
-
-            // Handle if Discord ID is incorrect or avatar can't be loaded
-            fetch(avatarUrl).then(response => {
-                if (response.ok) {
-                    userAvatar.src = avatarUrl;
-                } else {
-                    userAvatar.src = ''; // Set to a default or error image
-                    alert('Avatar not found');
-                }
-            });
-        });
     </script>
 
 </body>
