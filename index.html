@@ -146,25 +146,23 @@
                             img.src = decoration.url;
                             img.alt = decoration.name;
 
+                            // Create the decoration name element
+                            const decorationName = document.createElement('div');
+                            decorationName.textContent = decoration.name;
+                            decorationName.className = 'decoration-name';
+
+                            // Create the creator link
+                            const creatorLink = document.createElement('a');
+                            creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
+                            creatorLink.textContent = decoration.creator;
+                            creatorLink.className = 'creator-link';
+                            creatorLink.target = '_blank'; // Open in new tab
+
                             // Add image load event listener
                             img.onload = () => {
-                                // Create a decoration name element
-                                const decorationName = document.createElement('div');
-                                decorationName.textContent = decoration.name;
-                                decorationName.className = 'decoration-name';
+                                // Append the name and creator link after the image has loaded
                                 gridItem.appendChild(decorationName);
-
-                                // Create the creator link
-                                if (decoration.id && decoration.creator) {
-                                    const creatorLink = document.createElement('a');
-                                    creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
-                                    creatorLink.textContent = decoration.creator;
-                                    creatorLink.className = 'creator-link';
-                                    creatorLink.target = '_blank'; // Open in new tab
-
-                                    // Append the creator link to the grid item
-                                    gridItem.appendChild(creatorLink);
-                                }
+                                gridItem.appendChild(creatorLink);
                             };
 
                             gridItem.appendChild(img);
