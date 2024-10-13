@@ -6,9 +6,9 @@
     <title>Decoration Grid</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1e1e2e;
-            color: #f5f5f7;
+            font-family: 'Verdana', sans-serif; /* Changed font */
+            background-color: #181818; /* Darker background */
+            color: #e0e0e0; /* Lighter text color */
             margin: 0;
             padding: 20px;
             display: flex;
@@ -17,7 +17,7 @@
         }
 
         h1 {
-            color: #79aaff;
+            color: #00ccff; /* Light blue color for title */
             margin-bottom: 20px;
             font-size: 36px;
             text-transform: uppercase;
@@ -26,7 +26,7 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Slightly larger min size */
             gap: 20px;
             width: 100%;
             max-width: 1200px;
@@ -37,27 +37,29 @@
             text-align: center;
             cursor: pointer;
             overflow: hidden;
-            width: 150px;
-            height: 150px;
-            background-color: #2a2a39; /* Adding background for better visibility */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            padding: 10px; /* Add padding to grid item */
+            background-color: #292929; /* Slightly lighter background for items */
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            transition: transform 0.2s; /* Animation effect */
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05); /* Scale effect on hover */
         }
 
         .grid-item img {
             width: 100%;
-            height: 100%;
+            height: 100px; /* Fixed height for uniformity */
             object-fit: contain;
-            border-radius: 10px 10px 0 0; /* Rounded top corners */
+            border-radius: 12px 12px 0 0; /* Rounded top corners */
         }
 
         .creator-link {
             margin-top: 5px;
             font-size: 14px;
-            color: #79aaff;
+            color: #00ccff; /* Light blue color for links */
             text-decoration: none;
-            display: block; /* Ensuring it takes the whole width */
         }
 
         .creator-link:hover {
@@ -65,20 +67,18 @@
         }
 
         .decoration-name {
-            font-size: 14px; /* Set font size for decoration name */
+            font-size: 14px; 
             margin-top: 5px;
-            color: #f5f5f7; /* Set text color */
+            color: #e0e0e0; 
         }
 
         .group-title {
             margin-top: 40px;
             font-size: 28px;
-            color: #79aaff;
+            color: #00ccff; /* Light blue color for group titles */
             letter-spacing: 1px;
-            border-bottom: 2px solid #79aaff;
+            border-bottom: 2px solid #00ccff; /* Border color matches */
             padding-bottom: 10px;
-            width: 100%;
-            max-width: 1200px;
             text-align: center;
         }
 
@@ -106,14 +106,12 @@
     <div id="grid"></div>
 
     <script>
-        // Function to get the file extension from a URL
         function getFileExtension(url) {
             return url.split('.').pop().split(/\#|\?/)[0];
         }
 
-        // Function to load decorations from the JSON file
         function loadDecorations() {
-            fetch('decorations.json?timestamp=' + new Date().getTime()) // Cache busting
+            fetch('decorations.json?timestamp=' + new Date().getTime())
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to load decorations.json');
@@ -122,22 +120,19 @@
                 })
                 .then(data => {
                     const grid = document.getElementById('grid');
-                    grid.innerHTML = ''; // Clear previous content
+                    grid.innerHTML = '';
 
                     Object.keys(data.groups).forEach(groupName => {
                         const group = data.groups[groupName];
 
-                        // Create and append group title
                         const groupTitle = document.createElement('h2');
                         groupTitle.textContent = groupName.charAt(0).toUpperCase() + groupName.slice(1);
                         groupTitle.className = 'group-title';
                         grid.appendChild(groupTitle);
 
-                        // Create a container for the group's decorations
                         const gridContainer = document.createElement('div');
                         gridContainer.className = 'grid-container';
 
-                        // Create grid items for each decoration
                         group.forEach(decoration => {
                             const gridItem = document.createElement('div');
                             gridItem.className = 'grid-item';
@@ -146,28 +141,22 @@
                             img.src = decoration.url;
                             img.alt = decoration.name;
 
-                            // Create the decoration name element
                             const decorationName = document.createElement('div');
                             decorationName.textContent = decoration.name;
                             decorationName.className = 'decoration-name';
 
-                            // Create the creator link
                             const creatorLink = document.createElement('a');
                             creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
                             creatorLink.textContent = decoration.creator;
                             creatorLink.className = 'creator-link';
-                            creatorLink.target = '_blank'; // Open in new tab
+                            creatorLink.target = '_blank'; 
 
-                            // Add image load event listener
                             img.onload = () => {
-                                // Append the name and creator link after the image has loaded
+                                gridItem.appendChild(img);
                                 gridItem.appendChild(decorationName);
                                 gridItem.appendChild(creatorLink);
                             };
 
-                            gridItem.appendChild(img);
-
-                            // Add click event listener to trigger download
                             gridItem.addEventListener('click', () => {
                                 fetch(decoration.url)
                                     .then(response => {
@@ -179,15 +168,14 @@
                                     .then(blob => {
                                         const url = window.URL.createObjectURL(blob);
                                         const a = document.createElement('a');
-                                        const extension = getFileExtension(decoration.url); // Get file extension
+                                        const extension = getFileExtension(decoration.url); 
 
-                                        // Use the decoration name + correct extension for the download filename
                                         a.href = url;
                                         a.download = `${decoration.name}.${extension}`;
                                         document.body.appendChild(a);
                                         a.click();
                                         a.remove();
-                                        window.URL.revokeObjectURL(url); // Clean up the URL object
+                                        window.URL.revokeObjectURL(url);
                                     })
                                     .catch(error => {
                                         console.error('Error downloading image:', error);
@@ -205,7 +193,6 @@
                 });
         }
 
-        // Load decorations when the page loads
         window.addEventListener('load', loadDecorations);
     </script>
 
