@@ -117,7 +117,8 @@
         "name": "Espurr",
         "url": "https://i.imgur.com/Sv6uCfg.png",
         "creator": "amigacore",
-        "id": "501112222676942848"
+        "id": "501112222676942848",
+        "preview": "https://i.ibb.co/9vhNYyf/image.png"
       }
     ],
     "Genshin Impact": [
@@ -146,6 +147,15 @@
         "url": "https://i.ibb.co/B4RHL81/ezgif-1-a88410cf2a.png",
         "creator": "FoxStorm1",
         "id": "789872551731527690"
+      }
+    ],
+    "Cat Noir": [
+      {
+        "name": "Cat Noir",
+        "url": "https://i.ibb.co/w0FhyBZ/catnoir.png",
+        "creator": "b4ixinho",
+        "id": "715294401353613325",
+        "preview": "https://i.ibb.co/XW8c79Y/image.png"
       }
     ]
   }
