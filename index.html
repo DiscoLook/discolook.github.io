@@ -6,9 +6,9 @@
     <title>Decoration Grid</title>
     <style>
         body {
-            font-family: 'Verdana', sans-serif; /* Changed font */
-            background-color: #181818; /* Darker background */
-            color: #e0e0e0; /* Lighter text color */
+            font-family: 'Verdana', sans-serif;
+            background-color: #181818;
+            color: #e0e0e0;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -17,7 +17,7 @@
         }
 
         h1 {
-            color: #00ccff; /* Light blue color for title */
+            color: #00ccff;
             margin-bottom: 20px;
             font-size: 36px;
             text-transform: uppercase;
@@ -26,7 +26,7 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Slightly larger min size */
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Auto-sizing grid items */
             gap: 20px;
             width: 100%;
             max-width: 1200px;
@@ -37,23 +37,29 @@
             text-align: center;
             cursor: pointer;
             overflow: hidden;
-            background-color: #292929; /* Slightly lighter background for items */
+            background-color: #292929;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             padding: 10px;
-            transition: transform 0.2s; /* Animation effect */
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .grid-item:hover {
-            transform: scale(1.05); /* Scale effect on hover */
+            transform: scale(1.05);
         }
 
         .grid-item img {
-            max-width: 100%; /* Ensure the image fits within the container */
-            height: auto; /* Maintain aspect ratio */
+            width: 100%;
+            height: auto;
+            max-width: 120px; /* Prevent overflow */
+            max-height: 120px;
             object-fit: contain;
-            border-radius: 12px 12px 0 0; /* Rounded top corners */
-            transition: opacity 0.3s; /* Smooth transition for fading */
+            border-radius: 12px 12px 0 0;
+            transition: opacity 0.3s;
         }
 
         .grid-item img.preview {
@@ -61,24 +67,24 @@
             top: 0;
             left: 0;
             opacity: 0;
-            max-width: 100%;
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 12px 12px 0 0; /* Rounded top corners */
-            transition: opacity 0.3s; /* Smooth transition for fading */
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            transition: opacity 0.3s;
         }
 
         .grid-item:hover img.main {
-            opacity: 0; /* Fade out main image */
+            opacity: 0;
         }
 
         .grid-item:hover img.preview {
-            opacity: 1; /* Fade in preview image */
+            opacity: 1;
         }
 
         .creator-link {
             margin-top: 5px;
             font-size: 14px;
-            color: #00ccff; /* Light blue color for links */
+            color: #00ccff;
             text-decoration: none;
         }
 
@@ -87,17 +93,17 @@
         }
 
         .decoration-name {
-            font-size: 14px; 
+            font-size: 14px;
             margin-top: 5px;
-            color: #e0e0e0; 
+            color: #e0e0e0;
         }
 
         .group-title {
             margin-top: 40px;
             font-size: 28px;
-            color: #00ccff; /* Light blue color for group titles */
+            color: #00ccff;
             letter-spacing: 1px;
-            border-bottom: 2px solid #00ccff; /* Border color matches */
+            border-bottom: 2px solid #00ccff;
             padding-bottom: 10px;
             text-align: center;
         }
@@ -105,17 +111,21 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .grid-container {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Adjust for smaller screens */
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Smaller columns for smaller screens */
             }
         }
 
         @media (max-width: 500px) {
             h1 {
-                font-size: 28px; /* Adjust title font size for small screens */
+                font-size: 28px;
             }
 
             .group-title {
-                font-size: 20px; /* Adjust group title font size for small screens */
+                font-size: 20px;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Further reduce size for small screens */
             }
         }
     </style>
