@@ -102,6 +102,7 @@
             text-align: center;
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .grid-container {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -185,7 +186,6 @@
 
                             // Click event for downloading the main image
                             gridItem.addEventListener('click', (event) => {
-                                // Check if the click target is not the creator link
                                 if (event.target !== creatorLink) {
                                     fetch(decoration.url)
                                         .then(response => {
