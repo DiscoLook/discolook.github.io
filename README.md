@@ -1,5 +1,5 @@
-# discolook.github.io
-A discord lookup tool including discord client mod information.
+# DiscoLook
+A discord decoration sharing website.
 
 # Future Decoration Addition Checklist
 ## Super Animal Royale
