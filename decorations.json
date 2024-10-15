@@ -189,32 +189,27 @@
         "preview": "https://i.ibb.co/zH6LwwZ/image.png"
       },
       {
-        "name": "Xiao",
-        "url": "https://i.ibb.co/xG5SyRQ/ezgif-1-499e3d7c09.png",
+        "name": "Itto",
+        "url": "https://i.ibb.co/QrJfPBq/ezgif-1-4a538bdce5.png",
         "creator": "FoxStorm1",
         "id": "789872551731527690",
-        "preview": "https://i.ibb.co/X7CMyFS/image.png"
+        "preview": "https://i.ibb.co/pyR6C2F/image.png"
       },
       {
-        "name": "Lumine",
-        "url": "https://i.ibb.co/ZL1r4MF/ezgif-1-92de43eb4d.png",
+        "name": "Furina",
+        "url": "https://i.ibb.co/ch7DHz6/ezgif-1-b6e1fecf49.png",
         "creator": "FoxStorm1",
         "id": "789872551731527690",
-        "preview": "https://i.ibb.co/4tTRBFX/image.png"
-      },
+        "preview": "https://i.ibb.co/hZ3FJsg/image.png"
+      }
+    ],
+    "Miraculous: Tales of Ladybug & Cat Noir": [
       {
-        "name": "Diluc",
-        "url": "https://i.ibb.co/mDzJ0Rm/ezgif-1-66f401ac83.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/jh0H9yd/image.png"
-      },
-      {
-        "name": "Cyno",
-        "url": "https://i.ibb.co/p2RJ9JW/ezgif-1-3276215d0c.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/bWx8Rwh/image.png"
+        "name": "Cat Noir",
+        "url": "https://i.ibb.co/w0FhyBZ/catnoir.png",
+        "creator": "b4ixinho",
+        "id": "715294401353613325",
+        "preview": "https://i.ibb.co/XW8c79Y/image.png"
       }
     ]
   }
