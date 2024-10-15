@@ -8,32 +8,6 @@ A platform for sharing and discovering decorations for Discord.
 
 
 
-### Super Animal Royale
-
-- **Mini Capybara**
-
-- **Mini Lizard**
-
-- **Mini Chicken**
-
-- **Mini Sloth**
-
-- **Mini Bear**
-
-- **Mini Hippo**
-
-- **Mini Raccoon**
-
-- **Mini Sheep**
-
-- **Mini Skullcat**
-
-- **Mini Tiger**
-
-- **Mini Wolf**
-
-
-
 ### Genshin Impact
 
 - **Arlecchino**
