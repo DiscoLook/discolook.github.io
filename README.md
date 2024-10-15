@@ -2,7 +2,9 @@
 
 A platform for sharing and discovering decorations for Discord.
 
+## Future Features Addition Checklist
 
+Image hash changer to allow use of decoration already used by someone without using an image editor to edit file.
 
 ## Future Decoration Addition Checklist
 
