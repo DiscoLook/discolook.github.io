@@ -102,6 +102,13 @@
             text-align: center;
         }
 
+        .note {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #ffcc00; /* Yellow for visibility */
+            text-align: center;
+        }
+
         @media (max-width: 768px) {
             .grid-container {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -124,6 +131,12 @@
     <h1>Decorations Grid</h1>
 
     <div id="grid"></div>
+
+    <div class="note">
+        If you encounter an error stating that someone already has the decoration, 
+        please go to <a href="https://www.strerr.com/en/md5_hash_chanager.html" target="_blank">this site</a>, 
+        upload the file, download it again, and then it will allow you to upload it without the error.
+    </div>
 
     <script>
         function getFileExtension(url) {
