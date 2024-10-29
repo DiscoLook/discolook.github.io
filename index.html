@@ -209,30 +209,29 @@
 
                             // Click event for downloading the main image
                             gridItem.addEventListener('click', (event) => {
-                                if (event.target !== creatorLink && (!decoration.creatorDecor || event.target !== forZoinkLink)) {
-                                    fetch(decoration.url)
-                                        .then(response => {
-                                            if (!response.ok) {
-                                                throw new Error('Failed to fetch image');
-                                            }
-                                            return response.blob();
-                                        })
-                                        .then(blob => {
-                                            const url = window.URL.createObjectURL(blob);
-                                            const a = document.createElement('a');
-                                            const extension = getFileExtension(decoration.url);
+                                // Allow download for all items
+                                fetch(decoration.url)
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Failed to fetch image');
+                                        }
+                                        return response.blob();
+                                    })
+                                    .then(blob => {
+                                        const url = window.URL.createObjectURL(blob);
+                                        const a = document.createElement('a');
+                                        const extension = getFileExtension(decoration.url);
 
-                                            a.href = url;
-                                            a.download = `${decoration.name}.${extension}`;
-                                            document.body.appendChild(a);
-                                            a.click();
-                                            a.remove();
-                                            window.URL.revokeObjectURL(url);
-                                        })
-                                        .catch(error => {
-                                            console.error('Error downloading image:', error);
-                                        });
-                                }
+                                        a.href = url;
+                                        a.download = `${decoration.name}.${extension}`;
+                                        document.body.appendChild(a);
+                                        a.click();
+                                        a.remove();
+                                        window.URL.revokeObjectURL(url);
+                                    })
+                                    .catch(error => {
+                                        console.error('Error downloading image:', error);
+                                    });
                             });
 
                             gridContainer.appendChild(gridItem);
