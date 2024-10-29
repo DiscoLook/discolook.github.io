@@ -191,14 +191,14 @@
                             creatorLink.className = 'creator-link';
                             creatorLink.target = '_blank';
 
-                            // Append socials link if decoration is creator decor
+                            // Append "For Zoink" link if decoration is creator decor
                             if (decoration.creatorDecor && decoration.socials) {
-                                const socialsLink = document.createElement('a');
-                                socialsLink.href = decoration.socials;
-                                socialsLink.textContent = 'Creator Socials';
-                                socialsLink.className = 'socials-link';
-                                socialsLink.target = '_blank';
-                                gridItem.appendChild(socialsLink);
+                                const forZoinkLink = document.createElement('a');
+                                forZoinkLink.href = decoration.socials; // Link to creator's socials
+                                forZoinkLink.textContent = 'For Zoink'; // Display text
+                                forZoinkLink.className = 'socials-link';
+                                forZoinkLink.target = '_blank';
+                                gridItem.appendChild(forZoinkLink);
                             }
 
                             // Append images, name, and link to grid item
@@ -209,7 +209,7 @@
 
                             // Click event for downloading the main image
                             gridItem.addEventListener('click', (event) => {
-                                if (event.target !== creatorLink && (!decoration.creatorDecor || event.target !== socialsLink)) {
+                                if (event.target !== creatorLink && (!decoration.creatorDecor || event.target !== forZoinkLink)) {
                                     fetch(decoration.url)
                                         .then(response => {
                                             if (!response.ok) {
