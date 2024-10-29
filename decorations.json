@@ -203,128 +203,97 @@
         "preview": "https://i.ibb.co/9qP7Pyc/image.png",
         "creatorDecor": false
       }
-    ],
-    "Genshin Impact": [
+    ]
+  },
+    "flags": [
       {
-        "name": "Kaedehara Kazuha",
-        "url": "https://i.ibb.co/XS5v5bw/kazuhaavframe.webp",
-        "creator": "ikokomori",
-        "id": "943535807426334720",
-        "preview": "https://i.ibb.co/hHgBmp9/image.png",
-        "creatorDecor": false
-      },
-      {
-        "name": "Neuvillette",
-        "url": "https://i.ibb.co/fDqk76K/ezgif-2-54f69e3820.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/7zb4xtB/image.png",
-        "creatorDecor": false
-      },
-      {
-        "name": "Kaveh",
-        "url": "https://i.ibb.co/mFGcCMN/Ho-Yo-LAB-Avatar-Frame-Kaveh.webp",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/rZ2nwwC/image.png",
-        "creatorDecor": false
-      },
-      {
-        "name": "Discover Teyvat",
-        "url": "https://i.ibb.co/B4RHL81/ezgif-1-a88410cf2a.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.imgur.com/yI8zjNn.gif",
-        "creatorDecor": false
-      },
-      {
-        "name": "Paimon",
-        "url": "https://i.ibb.co/0qzqtjM/04d1cc33c9122bcc9da8c252f1b3098023ed016f.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/1zjxSzr/image.png",
-        "creatorDecor": false
-      },
-      {
-        "name": "Albedo",
-        "url": "https://i.ibb.co/xD25QRq/ezgif-1-73e0070288.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/26DF7PD/image.png",
-        "creatorDecor": false
-      },
-      {
-        "name": "Alhaitham",
-        "url": "https://i.ibb.co/RcDhhdh/ezgif-1-bb6f70d167.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/LzWy1Qt/image.png",
-        "creatorDecor": false
-      },
-      {
-        "name": "Amber",
-        "url": "https://i.ibb.co/fn4QxZY/ezgif-1-fd3e95b2ca.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/zH6LwwZ/image.png",
-        "creatorDecor": false
-      },
-      {
-        "name": "Itto",
-        "url": "https://i.ibb.co/QrJfPBq/ezgif-1-4a538bdce5.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/pyR6C2F/image.png",
-        "creatorDecor": false
-      },
-      {
-        "name": "Furina",
-        "url": "https://i.ibb.co/ch7DHz6/ezgif-1-b6e1fecf49.png",
-        "creator": "FoxStorm1",
-        "id": "789872551731527690",
-        "preview": "https://i.ibb.co/hZ3FJsg/image.png",
-        "creatorDecor": false
-      }
-    ],
-    "Miraculous: Tales of Ladybug & Cat Noir": [
-      {
-        "name": "Cat Noir",
-        "url": "https://i.ibb.co/w0FhyBZ/catnoir.png",
-        "creator": "b4ixinho",
-        "id": "715294401353613325",
-        "preview": "https://i.ibb.co/XW8c79Y/image.png",
-        "creatorDecor": false
-      }
-    ],
-    "Geometry Dash": [
-      {
-        "name": "GD Buddy",
-        "url": "https://i.ibb.co/4WKbK4B/Sans-titre-119-20241028182626.png",
+        "name": "Flag of Morocco",
+        "url": "https://i.ibb.co/qrYHtvY/Sans-titre-91-20241024192351.png",
         "creator": "Adamorocco",
         "id": "1175694573960441970",
-        "preview": "https://i.ibb.co/jhqxpSN/image.png",
+        "preview": "https://i.ibb.co/26TssQ3/image.png",
         "creatorDecor": false
       },
       {
-        "name": "Adamorocco Buddy",
-        "url": "https://i.ibb.co/DY7b0mM/Sans-titre-110-20241028081015.png",
+        "name": "Flag of Germany",
+        "url": "https://i.ibb.co/Pz3hZVx/Sans-titre-92-20241024192548.png",
         "creator": "Adamorocco",
         "id": "1175694573960441970",
-        "preview": "https://i.ibb.co/PDZ4FbM/image.png",
-        "creatorDecor": true,
-        "socials": "https://www.youtube.com/channel/UCp5ffm8wl6llQteMZ-3_6yw",
-        "decorText": "For Adamorocco"
+        "preview": "https://i.ibb.co/yf1VmrL/image.png",
+        "creatorDecor": false
       },
       {
-        "name": "Zoink Buddy",
-        "url": "https://i.ibb.co/Dwm6Jnt/Sans-titre-111-20241028085214.png",
+        "name": "Flag of France",
+        "url": "https://i.ibb.co/DtRQf5S/Sans-titre-93-20241024192736.png",
         "creator": "Adamorocco",
         "id": "1175694573960441970",
-        "preview": "https://i.ibb.co/GMg73zY/image.png",
-        "creatorDecor": true,
-        "socials": "https://www.youtube.com/@Zoink",
-        "decorText": "For Zoink"
+        "preview": "",
+        "creatorDecor": false
+      },
+      {
+        "name": "Flag of Poland",
+        "url": "https://i.ibb.co/VCZLFGD/Sans-titre-94-20241024193118.png",
+        "creator": "Adamorocco",
+        "id": "1175694573960441970",
+        "preview": "",
+        "creatorDecor": false
+      },
+      {
+        "name": "Flag of USA",
+        "url": "https://i.imgur.com/9V4YXqo.png",
+        "creator": "Adamorocco",
+        "id": "1175694573960441970",
+        "preview": "",
+        "creatorDecor": false
+      },
+      {
+        "name": "Flag of Italy",
+        "url": "https://i.imgur.com/iFsKGA0.png",
+        "creator": "Adamorocco",
+        "id": "1175694573960441970",
+        "preview": "",
+        "creatorDecor": false
+      },
+      {
+        "name": "Flag of Russia",
+        "url": "https://i.imgur.com/6fqd1xO.png",
+        "creator": "Adamorocco",
+        "id": "1175694573960441970",
+        "preview": "",
+        "creatorDecor": false
+      },
+      {
+        "name": "Flag of UK",
+        "url": "https://i.imgur.com/09RxNxE.png",
+        "creator": "Adamorocco",
+        "id": "1175694573960441970",
+        "preview": "",
+        "creatorDecor": false
+      },
+      {
+        "name": "Flag of Algeria",
+        "url": "https://i.imgur.com/q8TJXl2.png",
+        "creator": "Adamorocco",
+        "id": "1175694573960441970",
+        "preview": "",
+        "creatorDecor": false
+      },
+      {
+        "name": "Flag of Yugoslavia",
+        "url": "https://i.imgur.com/Mwzkee6.png",
+        "creator": "Adamorocco",
+        "id": "1175694573960441970",
+        "preview": "",
+        "creatorDecor": false
+      },
+      {
+        "name": "Flag of East Germany",
+        "url": "https://i.imgur.com/JGlv8xe.png",
+        "creator": "Adamorocco",
+        "id": "1175694573960441970",
+        "preview": "",
+        "creatorDecor": false
       }
     ]
   }
-}
+
