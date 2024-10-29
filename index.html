@@ -6,9 +6,9 @@
     <title>Decoration Grid</title>
     <style>
         body {
-            font-family: 'Verdana', sans-serif; /* Changed font */
-            background-color: #181818; /* Darker background */
-            color: #e0e0e0; /* Lighter text color */
+            font-family: 'Verdana', sans-serif;
+            background-color: #181818;
+            color: #e0e0e0;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -17,7 +17,7 @@
         }
 
         h1 {
-            color: #00ccff; /* Light blue color for title */
+            color: #00ccff;
             margin-bottom: 20px;
             font-size: 36px;
             text-transform: uppercase;
@@ -26,7 +26,7 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Slightly larger min size */
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 20px;
             width: 100%;
             max-width: 1200px;
@@ -37,23 +37,23 @@
             text-align: center;
             cursor: pointer;
             overflow: hidden;
-            background-color: #292929; /* Slightly lighter background for items */
+            background-color: #292929;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             padding: 10px;
-            transition: transform 0.2s; /* Animation effect */
+            transition: transform 0.2s;
         }
 
         .grid-item:hover {
-            transform: scale(1.05); /* Scale effect on hover */
+            transform: scale(1.05);
         }
 
         .grid-item img {
             width: 100%;
-            height: 100px; /* Fixed height for uniformity */
+            height: 100px;
             object-fit: contain;
-            border-radius: 12px 12px 0 0; /* Rounded top corners */
-            transition: opacity 0.3s; /* Smooth transition for fading */
+            border-radius: 12px 12px 0 0;
+            transition: opacity 0.3s;
         }
 
         .grid-item img.preview {
@@ -63,41 +63,42 @@
             opacity: 0;
             width: 100%;
             height: 100px;
-            border-radius: 12px 12px 0 0; /* Rounded top corners */
-            transition: opacity 0.3s; /* Smooth transition for fading */
+            border-radius: 12px 12px 0 0;
+            transition: opacity 0.3s;
         }
 
         .grid-item:hover img.main {
-            opacity: 0; /* Fade out main image */
+            opacity: 0;
         }
 
         .grid-item:hover img.preview {
-            opacity: 1; /* Fade in preview image */
+            opacity: 1;
         }
 
-        .creator-link {
-            margin-top: 5px;
+        .creator-link, .socials-link {
+            display: block;
             font-size: 14px;
-            color: #00ccff; /* Light blue color for links */
+            color: #00ccff;
             text-decoration: none;
+            margin-top: 5px;
         }
 
-        .creator-link:hover {
+        .creator-link:hover, .socials-link:hover {
             text-decoration: underline;
         }
 
         .decoration-name {
-            font-size: 14px; 
+            font-size: 14px;
             margin-top: 5px;
-            color: #e0e0e0; 
+            color: #e0e0e0;
         }
 
         .group-title {
             margin-top: 40px;
             font-size: 28px;
-            color: #00ccff; /* Light blue color for group titles */
+            color: #00ccff;
             letter-spacing: 1px;
-            border-bottom: 2px solid #00ccff; /* Border color matches */
+            border-bottom: 2px solid #00ccff;
             padding-bottom: 10px;
             text-align: center;
         }
@@ -105,7 +106,7 @@
         .note {
             margin-top: 20px;
             font-size: 16px;
-            color: #00ccff; /* Yellow for visibility */
+            color: #00ccff;
             text-align: center;
         }
 
@@ -176,7 +177,7 @@
                             mainImg.className = 'main';
 
                             const previewImg = document.createElement('img');
-                            previewImg.src = decoration.preview || ''; // Use preview image if exists
+                            previewImg.src = decoration.preview || '';
                             previewImg.alt = decoration.name + ' Preview';
                             previewImg.className = 'preview';
 
@@ -188,7 +189,17 @@
                             creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
                             creatorLink.textContent = decoration.creator;
                             creatorLink.className = 'creator-link';
-                            creatorLink.target = '_blank'; 
+                            creatorLink.target = '_blank';
+
+                            // Append socials link if decoration is creator decor
+                            if (decoration.creatorDecor && decoration.socials) {
+                                const socialsLink = document.createElement('a');
+                                socialsLink.href = decoration.socials;
+                                socialsLink.textContent = 'Creator Socials';
+                                socialsLink.className = 'socials-link';
+                                socialsLink.target = '_blank';
+                                gridItem.appendChild(socialsLink);
+                            }
 
                             // Append images, name, and link to grid item
                             gridItem.appendChild(mainImg);
@@ -198,8 +209,7 @@
 
                             // Click event for downloading the main image
                             gridItem.addEventListener('click', (event) => {
-                                // Check if the click target is not the creator link
-                                if (event.target !== creatorLink) {
+                                if (event.target !== creatorLink && (!decoration.creatorDecor || event.target !== socialsLink)) {
                                     fetch(decoration.url)
                                         .then(response => {
                                             if (!response.ok) {
