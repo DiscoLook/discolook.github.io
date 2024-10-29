@@ -3,141 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decoration Grid</title>
+    <title>Decoration Gallery</title>
     <style>
         body {
-            font-family: 'Verdana', sans-serif;
-            background-color: #181818;
-            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         h1 {
-            color: #00ccff;
-            margin-bottom: 20px;
-            font-size: 36px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
         }
 
         .grid-item {
-            position: relative;
-            text-align: center;
-            cursor: pointer;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             overflow: hidden;
-            background-color: #292929;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            padding: 10px;
-            transition: transform 0.2s;
-        }
-
-        .grid-item:hover {
-            transform: scale(1.05);
+            cursor: pointer;
+            position: relative;
         }
 
         .grid-item img {
             width: 100%;
-            height: 100px;
-            object-fit: contain;
-            border-radius: 12px 12px 0 0;
-            transition: opacity 0.3s;
-        }
-
-        .grid-item img.preview {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            width: 100%;
-            height: 100px;
-            border-radius: 12px 12px 0 0;
-            transition: opacity 0.3s;
-        }
-
-        .grid-item:hover img.main {
-            opacity: 0;
-        }
-
-        .grid-item:hover img.preview {
-            opacity: 1;
-        }
-
-        .creator-link, .socials-link {
+            height: auto;
             display: block;
-            font-size: 14px;
-            color: #00ccff;
-            text-decoration: none;
-            margin-top: 5px;
+            transition: transform 0.3s;
         }
 
-        .creator-link:hover, .socials-link:hover {
-            text-decoration: underline;
+        .grid-item img:hover {
+            transform: scale(1.05);
         }
 
         .decoration-name {
-            font-size: 14px;
-            margin-top: 5px;
-            color: #e0e0e0;
-        }
-
-        .group-title {
-            margin-top: 40px;
-            font-size: 28px;
-            color: #00ccff;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #00ccff;
-            padding-bottom: 10px;
+            padding: 10px;
             text-align: center;
+            font-weight: bold;
         }
 
-        .note {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #00ccff;
+        .creator-link {
+            display: block;
             text-align: center;
+            margin: 5px 0;
+            color: #007bff;
+            text-decoration: none;
         }
 
-        @media (max-width: 768px) {
-            .grid-container {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
+        .socials-link {
+            display: block;
+            text-align: center;
+            margin: 5px 0;
+            color: #28a745;
+            text-decoration: none;
         }
 
-        @media (max-width: 500px) {
-            h1 {
-                font-size: 28px;
-            }
-
-            .group-title {
-                font-size: 20px;
-            }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
-
-    <h1>Decorations Grid</h1>
-
-    <div id="grid"></div>
-
-    <div class="note">
-        If you encounter an error stating that someone already has the decoration, 
-        please go to <a href="https://www.strerr.com/en/md5_hash_chanager.html" target="_blank">this site</a>, 
-        upload the file, download it again, and then it will allow you to upload it without the error.
-    </div>
+    <h1>Decoration Gallery</h1>
+    <div id="grid" class="grid"></div>
 
     <script>
         function getFileExtension(url) {
@@ -145,7 +88,7 @@
         }
 
         function loadDecorations() {
-            fetch('decorations.json?timestamp=' + new Date().getTime())
+            fetch('decorations.json?' + Date.now())
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Failed to load decorations.json');
@@ -175,11 +118,13 @@
                             mainImg.src = decoration.url;
                             mainImg.alt = decoration.name;
                             mainImg.className = 'main';
+                            mainImg.loading = 'lazy'; // Lazy loading
 
                             const previewImg = document.createElement('img');
                             previewImg.src = decoration.preview || '';
                             previewImg.alt = decoration.name + ' Preview';
                             previewImg.className = 'preview';
+                            previewImg.loading = 'lazy'; // Lazy loading
 
                             const decorationName = document.createElement('div');
                             decorationName.textContent = decoration.name;
@@ -197,14 +142,16 @@
                             gridItem.appendChild(decorationName);
                             gridItem.appendChild(creatorLink);
 
-                            // Append "For Zoink" link if decoration is creator decor
+                            // Append creator decor link with decorText if available
                             if (decoration.creatorDecor && decoration.socials) {
-                                const forZoinkLink = document.createElement('a');
-                                forZoinkLink.href = decoration.socials; // Link to creator's socials
-                                forZoinkLink.textContent = 'For Zoink'; // Display text
-                                forZoinkLink.className = 'socials-link';
-                                forZoinkLink.target = '_blank';
-                                gridItem.appendChild(forZoinkLink); // Moved here to be below the creator link
+                                const forLink = document.createElement('a');
+                                forLink.href = decoration.socials; // Link to creator's socials
+                                if (decoration.decorText) {
+                                    forLink.textContent = decoration.decorText; // Use decorText if available
+                                    forLink.className = 'socials-link';
+                                    forLink.target = '_blank';
+                                    gridItem.appendChild(forLink); // Moved here to be below the creator link
+                                }
                             }
 
                             // Click event for downloading the main image
@@ -244,11 +191,14 @@
                 })
                 .catch(error => {
                     console.error('Error loading decorations:', error);
+                    const errorMessage = document.createElement('div');
+                    errorMessage.textContent = 'Failed to load decorations. Please try again later.';
+                    errorMessage.className = 'error-message';
+                    grid.appendChild(errorMessage);
                 });
         }
 
         window.addEventListener('load', loadDecorations);
     </script>
-
 </body>
 </html>
