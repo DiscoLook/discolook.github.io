@@ -303,7 +303,9 @@
         "creator": "Adamorocco",
         "id": "1175694573960441970",
         "preview": "https://i.ibb.co/jhqxpSN/image.png",
-        "creatorDecor": false
+        "creatorDecor": true,
+        "socials": "https://www.robtopgames.com/",
+        "decorText": "For RobTopGames"
       },
       {
         "name": "Adamorocco Buddy",
