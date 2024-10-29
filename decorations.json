@@ -312,7 +312,8 @@
         "id": "1175694573960441970",
         "preview": "https://i.ibb.co/PDZ4FbM/image.png",
         "creatorDecor": true,
-        "socials": "https://www.youtube.com/channel/UCp5ffm8wl6llQteMZ-3_6yw"
+        "socials": "https://www.youtube.com/channel/UCp5ffm8wl6llQteMZ-3_6yw",
+        "decorText": "For Adamorocco"
       },
       {
         "name": "Zoink Buddy",
@@ -321,7 +322,8 @@
         "id": "1175694573960441970",
         "preview": "https://i.ibb.co/GMg73zY/image.png",
         "creatorDecor": true,
-        "socials": "https://www.youtube.com/@Zoink"
+        "socials": "https://www.youtube.com/@Zoink",
+        "decorText": "For Zoink"
       }
     ]
   }
