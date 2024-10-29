@@ -191,6 +191,12 @@
                             creatorLink.className = 'creator-link';
                             creatorLink.target = '_blank';
 
+                            // Append images, name, and link to grid item
+                            gridItem.appendChild(mainImg);
+                            gridItem.appendChild(previewImg);
+                            gridItem.appendChild(decorationName);
+                            gridItem.appendChild(creatorLink);
+
                             // Append "For Zoink" link if decoration is creator decor
                             if (decoration.creatorDecor && decoration.socials) {
                                 const forZoinkLink = document.createElement('a');
@@ -198,14 +204,8 @@
                                 forZoinkLink.textContent = 'For Zoink'; // Display text
                                 forZoinkLink.className = 'socials-link';
                                 forZoinkLink.target = '_blank';
-                                gridItem.appendChild(forZoinkLink);
+                                gridItem.appendChild(forZoinkLink); // Moved here to be below the creator link
                             }
-
-                            // Append images, name, and link to grid item
-                            gridItem.appendChild(mainImg);
-                            gridItem.appendChild(previewImg);
-                            gridItem.appendChild(decorationName);
-                            gridItem.appendChild(creatorLink);
 
                             // Click event for downloading the main image
                             gridItem.addEventListener('click', (event) => {
