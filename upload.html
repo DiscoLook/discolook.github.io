@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Decoration</title>
+    <style>
+        body {
+            font-family: 'Verdana', sans-serif;
+            background-color: #181818;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #00ccff;
+            margin-bottom: 20px;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-container {
+            background-color: #292929;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00ccff;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            font-size: 14px;
+            background-color: #404040;
+            color: #e0e0e0;
+        }
+
+        button {
+            background-color: #00ccff;
+            color: #181818;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0099cc;
+        }
+
+        .tutorial-link {
+            color: #00ccff;
+            text-decoration: none;
+            margin-top: 10px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add New Decoration</h1>
+    <div class="form-container">
+        <form id="decorationForm">
+            <div class="form-group">
+                <label for="name">Decoration Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="url">Image URL</label>
+                <input type="url" id="url" name="url" required>
+            </div>
+            <div class="form-group">
+                <label for="preview">Preview Image URL (optional)</label>
+                <input type="url" id="preview" name="preview">
+                <a href="how-to-get-preview.html" target="_blank" class="tutorial-link">How to Create a Preview Image</a>
+            </div>
+            <div class="form-group">
+                <label for="group">Group</label>
+                <input type="text" id="group" name="group" required>
+            </div>
+            <div class="form-group">
+                <label for="creator">Creator Name</label>
+                <input type="text" id="creator" name="creator">
+            </div>
+            <div class="form-group">
+                <label for="creatorId">Creator Discord ID</label>
+                <input type="text" id="creatorId" name="creatorId">
+            </div>
+            <div class="form-group">
+                <label for="decorText">Decoration Text (optional)</label>
+                <input type="text" id="decorText" name="decorText">
+            </div>
+            <div class="form-group">
+                <label for="socials">Creator Socials URL (only for themed decorations)</label>
+                <input type="url" id="socials" name="socials">
+            </div>
+            <button type="button" onclick="submitDecoration()">Submit Decoration</button>
+        </form>
+    </div>
+
+    <script>
+        function submitDecoration() {
+            const form = document.getElementById('decorationForm');
+            const formData = new FormData(form);
+            const decoration = {};
+
+            formData.forEach((value, key) => {
+                if (value) decoration[key] = value;
+            });
+
+            // Convert data to JSON
+            const jsonData = JSON.stringify(decoration, null, 2);
+            console.log("Decoration Data:", jsonData);
+            alert("Decoration submitted successfully!");
+        }
+    </script>
+</body>
+</html>
