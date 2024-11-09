@@ -28,42 +28,15 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            max-width: 500px;
+            max-width: 800px;
             width: 100%;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #00ccff;
-        }
-
-        input, textarea, select {
+        iframe {
+            border: none;
             width: 100%;
-            padding: 8px;
-            border-radius: 5px;
-            border: none;
-            font-size: 14px;
-            background-color: #404040;
-            color: #e0e0e0;
-        }
-
-        button {
-            background-color: #00ccff;
-            color: #181818;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #0099cc;
+            height: 1256px;
+            border-radius: 12px;
         }
 
         .tutorial-link {
@@ -78,59 +51,9 @@
 <body>
     <h1>Add New Decoration</h1>
     <div class="form-container">
-        <form id="decorationForm">
-            <div class="form-group">
-                <label for="name">Decoration Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="url">Image URL</label>
-                <input type="url" id="url" name="url" required>
-            </div>
-            <div class="form-group">
-                <label for="preview">Preview Image URL (optional)</label>
-                <input type="url" id="preview" name="preview">
-                <a href="docs/how-to-get-preview.html" target="_blank" class="tutorial-link">How to Create a Preview Image</a>
-            </div>
-            <div class="form-group">
-                <label for="group">Group</label>
-                <input type="text" id="group" name="group" required>
-            </div>
-            <div class="form-group">
-                <label for="creator">Creator Name</label>
-                <input type="text" id="creator" name="creator">
-            </div>
-            <div class="form-group">
-                <label for="creatorId">Creator Discord ID</label>
-                <input type="text" id="creatorId" name="creatorId">
-            </div>
-            <div class="form-group">
-                <label for="decorText">Decoration Text (optional)</label>
-                <input type="text" id="decorText" name="decorText">
-            </div>
-            <div class="form-group">
-                <label for="socials">Creator Socials URL (only for themed decorations)</label>
-                <input type="url" id="socials" name="socials">
-            </div>
-            <button type="button" onclick="submitDecoration()">Submit Decoration</button>
-        </form>
+        <!-- Embed Google Form here -->
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScvE1I7Mll0AAuMTvVfp8nmfnJTNC3G0g_BGmgh1kXL5xEorg/viewform?embedded=true" width="640" height="1256" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     </div>
-
-    <script>
-        function submitDecoration() {
-            const form = document.getElementById('decorationForm');
-            const formData = new FormData(form);
-            const decoration = {};
-
-            formData.forEach((value, key) => {
-                if (value) decoration[key] = value;
-            });
-
-            // Convert data to JSON
-            const jsonData = JSON.stringify(decoration, null, 2);
-            console.log("Decoration Data:", jsonData);
-            alert("Decoration submitted successfully!");
-        }
-    </script>
+    <a href="docs/how-to-get-preview.html" target="_blank" class="tutorial-link">How to Create a Preview Image</a>
 </body>
 </html>
