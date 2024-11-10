@@ -1,15 +1,33 @@
 {
     "groups": {
+        "Pokémon": [
+            {
+                "name": "Pokémon Gotta Catch 'Em All",
+                "url": "https://i.imgur.com/lOr9t7I.png",
+                "creator": "! Katsu",
+                "id": "773625796807360563",
+                "preview": "https://i.imgur.com/knGxUTV.jpeg",
+                "creatorDecor": false
+            }
+        ],
         "Omori collection": [
-  {
-    "name": "Big yellow cat/The favorite",
-    "url": "https://i.imgur.com/3l0dunH.png",
-    "creator": "k4lmaa",
-    "id": "842441744548495380",
-    "preview": "https://i.imgur.com/GReLurJ.png",
-    "creatorDecor": false
-  }
-],
+            {
+                "name": "Big yellow cat/The favorite",
+                "url": "https://i.imgur.com/3l0dunH.png",
+                "creator": "k4lmaa",
+                "id": "842441744548495380",
+                "preview": "https://i.imgur.com/GReLurJ.png",
+                "creatorDecor": false
+            },
+            {
+                "name": "Mari's basket",
+                "url": "https://i.imgur.com/q1FjGx4.png",
+                "creator": "k4lmaa",
+                "id": "842441744548495380",
+                "preview": "https://i.imgur.com/2i4Ipmu.png",
+                "creatorDecor": false
+            }
+        ],
         "DC": [
             {
                 "name": "Batman",
