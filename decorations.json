@@ -1,5 +1,15 @@
 {
     "groups": {
+        "Misc": [
+            {
+                "name": "The King",
+                "url": "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/items/1232580/d9fa9fa0713d70e1d599331daa47208220dfb6cd.png",
+                "creator": "FoxStorm1",
+                "id": "789872551731527690",
+                "preview": "https://cdn.fastly.steamstatic.com/steamcommunity/public/images/items/1232580/d9fa9fa0713d70e1d599331daa47208220dfb6cd.png",
+                "creatorDecor": false
+            }
+        ],
         "Terraria": [
             {
                 "name": "Eye of Cthulhu",
