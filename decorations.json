@@ -1,23 +1,35 @@
 {
-  "groups": {
-    "Call Of Duty": [
-      {
-        "name": "Black Ops 2",
-        "url": "https://i.imgur.com/qiF3dwC.png",
-        "creator": "! Katsu",
-        "id": "773625796807360563",
-        "preview": "https://i.imgur.com/oKniLxT.jpeg",
-        "creatorDecor": false
-      },
-      {
-        "name": "Black Ops 3",
-        "url": "https://i.imgur.com/boP6V0X.png",
-        "creator": "! Katsu",
-        "id": "773625796807360563",
-        "preview": "https://i.imgur.com/cFvbXdP.jpeg",
-        "creatorDecor": false
-      }
-    ],
+    "groups": {
+        "Hololive": [
+            {
+                "name": "Mococo Jump",
+                "url": "https://i.imgur.com/7vbP05z.png",
+                "creator": "KURAMA",
+                "id": "272359106839314446",
+                "preview": "https://i.imgur.com/7vbP05z.png",
+                "creatorDecor": true,
+                "socials": "https://www.youtube.com/@FUWAMOCOchHololive",
+                "decorText": "For FUWAMOCO"
+            }
+        ],
+        "Call Of Duty": [
+            {
+                "name": "Black Ops 2",
+                "url": "https://i.imgur.com/qiF3dwC.png",
+                "creator": "! Katsu",
+                "id": "773625796807360563",
+                "preview": "https://i.imgur.com/oKniLxT.jpeg",
+                "creatorDecor": false
+            },
+            {
+                "name": "Black Ops 3",
+                "url": "https://i.imgur.com/boP6V0X.png",
+                "creator": "! Katsu",
+                "id": "773625796807360563",
+                "preview": "https://i.imgur.com/cFvbXdP.jpeg",
+                "creatorDecor": false
+            }
+        ],
         "Pokémon": [
             {
                 "name": "Pokémon Gotta Catch 'Em All",
