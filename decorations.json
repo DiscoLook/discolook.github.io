@@ -1,5 +1,15 @@
 {
     "groups": {
+        "Terraria": [
+            {
+                "name": "Eye of Cthulhu",
+                "url": "https://i.imgur.com/D61D0qH.png",
+                "creator": "Moon Man",
+                "id": "828759555013083189",
+                "preview": "https://i.imgur.com/D61D0qH.png",
+                "creatorDecor": false
+            }
+        ],
         "Hololive": [
             {
                 "name": "Mococo Jump",
@@ -65,13 +75,13 @@
                 "preview": "https://i.imgur.com/Z33JlpY.png",
                 "creatorDecor": false
             },
-                {
-              "name": "Basil's flower crown",
-              "url": "https://i.imgur.com/WzCh6Af.png",
-              "creator": "k4lmaa",
-              "id": "842441744548495380",
-              "preview": "https://i.imgur.com/WLEtCBh.png",
-              "creatorDecor": false
+            {
+                "name": "Basil's flower crown",
+                "url": "https://i.imgur.com/WzCh6Af.png",
+                "creator": "k4lmaa",
+                "id": "842441744548495380",
+                "preview": "https://i.imgur.com/WLEtCBh.png",
+                "creatorDecor": false
             }
         ],
         "DC": [
