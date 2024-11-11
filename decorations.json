@@ -58,6 +58,16 @@
                 "creatorDecor": false
             }
         ],
+        "CSGO": [
+            {
+                "name": "CSGO Knife",
+                "url": "https://i.imgur.com/32aEvcc.png",
+                "creator": "! Katsu",
+                "id": "773625796807360563",
+                "preview": "https://i.imgur.com/yNa27xB.jpeg",
+                "creatorDecor": false
+            }
+        ],
         "Pokémon": [
             {
                 "name": "Pokémon Gotta Catch 'Em All",
@@ -152,7 +162,7 @@
                 "creatorDecor": false
             }
         ],
-        "halloween": [
+        "Halloween": [
             {
                 "name": "Candlelit Phantoms",
                 "url": "https://ugc.decor.fieryflames.dev/5f9b45b9cfbbc81433398b13403b475c.png?animate=true",
@@ -177,6 +187,16 @@
                 "creator": ".dziurwa",
                 "id": "1001086404203389018",
                 "preview": "https://i.ibb.co/2ZtXLsW/image.png",
+                "creatorDecor": false
+            }
+        ],
+        "Splatoon": [
+            {
+                "name": "Splatoon Pretendo",
+                "url": "https://i.imgur.com/9OV7B2p.png",
+                "creator": "! Katsu",
+                "id": "773625796807360563",
+                "preview": "https://i.imgur.com/Qr2N6yd.jpeg",
                 "creatorDecor": false
             }
         ],
