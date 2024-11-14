@@ -18,6 +18,16 @@
                 "creatorDecor": false
             }
         ],
+        "Block Tales": [
+            {
+                "name": "Griefer",
+                "url": "https://i.imgur.com/iz5bTP4.png",
+                "creator": "epic_onee",
+                "id": "1164937760747028521521",
+                "preview": "https://i.imgur.com/4o3m2N1.png",
+                "creatorDecor": false
+            }
+        ],
         "Terraria": [
             {
                 "name": "Eye of Cthulhu",
@@ -109,6 +119,14 @@
                 "creator": "k4lmaa",
                 "id": "842441744548495380",
                 "preview": "https://i.imgur.com/WLEtCBh.png",
+                "creatorDecor": false
+            },
+            {
+                "name": "Sweetheart",
+                "url": "https://i.imgur.com/AMXy2kB.png",
+                "creator": "k4lmaa",
+                "id": "842441744548495380",
+                "preview": "https://i.imgur.com/G3ftkO4.png",
                 "creatorDecor": false
             }
         ],
