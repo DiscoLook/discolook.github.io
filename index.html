@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decoration Grid</title>
+    <title>Decoration Gallery</title>
     <style>
+        /* Basic styling */
         body {
             font-family: 'Verdana', sans-serif;
             background-color: #181818;
@@ -18,10 +19,10 @@
 
         h1 {
             color: #00ccff;
-            margin-bottom: 20px;
             font-size: 36px;
             text-transform: uppercase;
             letter-spacing: 2px;
+            margin: 20px 0;
         }
 
         .grid-container {
@@ -33,19 +34,19 @@
         }
 
         .grid-item {
-            position: relative;
-            text-align: center;
-            cursor: pointer;
-            overflow: hidden;
             background-color: #292929;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            padding: 10px;
-            transition: transform 0.2s;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s, background-color 0.2s;
+            position: relative;
+            cursor: pointer;
         }
 
         .grid-item:hover {
             transform: scale(1.05);
+            background-color: #333333;
         }
 
         .grid-item img {
@@ -61,9 +62,6 @@
             top: 0;
             left: 0;
             opacity: 0;
-            width: 100%;
-            height: 100px;
-            border-radius: 12px 12px 0 0;
             transition: opacity 0.3s;
         }
 
@@ -75,39 +73,39 @@
             opacity: 1;
         }
 
+        .decoration-name {
+            font-size: 14px;
+            color: #e0e0e0;
+            margin-top: 8px;
+        }
+
         .creator-link, .socials-link {
             display: block;
             font-size: 14px;
             color: #00ccff;
             text-decoration: none;
-            margin-top: 5px;
+            margin: 5px 0;
         }
 
         .creator-link:hover, .socials-link:hover {
             text-decoration: underline;
         }
 
-        .decoration-name {
-            font-size: 14px;
-            margin-top: 5px;
-            color: #e0e0e0;
-        }
-
         .group-title {
-            margin-top: 40px;
             font-size: 28px;
             color: #00ccff;
             letter-spacing: 1px;
+            margin-top: 40px;
             border-bottom: 2px solid #00ccff;
             padding-bottom: 10px;
             text-align: center;
         }
 
-        .note {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #00ccff;
+        .error-message {
+            color: #ff4d4d;
+            font-size: 18px;
             text-align: center;
+            margin-top: 20px;
         }
 
         @media (max-width: 768px) {
@@ -139,99 +137,87 @@
         function loadDecorations() {
             fetch('decorations.json?' + Date.now())
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to load decorations.json');
-                    }
+                    if (!response.ok) throw new Error('Failed to load decorations.json');
                     return response.json();
                 })
                 .then(data => {
                     const grid = document.getElementById('grid');
-                    grid.innerHTML = '';
+                    grid.innerHTML = ''; // Clear any existing content
 
-                    Object.keys(data.groups).forEach(groupName => {
-                        const group = data.groups[groupName];
-
+                    Object.entries(data.groups).forEach(([groupName, groupItems]) => {
+                        // Create and append group title
                         const groupTitle = document.createElement('h2');
                         groupTitle.textContent = groupName.charAt(0).toUpperCase() + groupName.slice(1);
                         groupTitle.className = 'group-title';
                         grid.appendChild(groupTitle);
 
+                        // Create grid container for each group
                         const gridContainer = document.createElement('div');
                         gridContainer.className = 'grid-container';
 
-                        group.forEach(decoration => {
+                        groupItems.forEach(decoration => {
                             const gridItem = document.createElement('div');
                             gridItem.className = 'grid-item';
 
+                            // Main and preview images
                             const mainImg = document.createElement('img');
                             mainImg.src = decoration.url;
                             mainImg.alt = decoration.name;
                             mainImg.className = 'main';
-                            mainImg.loading = 'lazy'; // Lazy loading
+                            mainImg.loading = 'lazy';
 
                             const previewImg = document.createElement('img');
                             previewImg.src = decoration.preview || '';
-                            previewImg.alt = decoration.name + ' Preview';
+                            previewImg.alt = `${decoration.name} Preview`;
                             previewImg.className = 'preview';
-                            previewImg.loading = 'lazy'; // Lazy loading
+                            previewImg.loading = 'lazy';
 
+                            // Decoration name
                             const decorationName = document.createElement('div');
                             decorationName.textContent = decoration.name;
                             decorationName.className = 'decoration-name';
 
+                            // Creator link
                             const creatorLink = document.createElement('a');
                             creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
                             creatorLink.textContent = decoration.creator;
                             creatorLink.className = 'creator-link';
                             creatorLink.target = '_blank';
 
-                            // Append images, name, and link to grid item
-                            gridItem.appendChild(mainImg);
-                            gridItem.appendChild(previewImg);
-                            gridItem.appendChild(decorationName);
-                            gridItem.appendChild(creatorLink);
-
-                            // Append creator decor link with decorText if available
+                            // Creator socials link if available
                             if (decoration.creatorDecor && decoration.socials) {
-                                const forLink = document.createElement('a');
-                                forLink.href = decoration.socials; // Link to creator's socials
-                                if (decoration.decorText) {
-                                    forLink.textContent = decoration.decorText; // Use decorText if available
-                                    forLink.className = 'socials-link';
-                                    forLink.target = '_blank';
-                                    gridItem.appendChild(forLink); // Moved here to be below the creator link
-                                }
+                                const socialsLink = document.createElement('a');
+                                socialsLink.href = decoration.socials;
+                                socialsLink.textContent = decoration.decorText || 'For Zoink';
+                                socialsLink.className = 'socials-link';
+                                socialsLink.target = '_blank';
+                                gridItem.appendChild(socialsLink);
                             }
 
-                            // Click event for downloading the main image
+                            // Add download functionality on click
                             gridItem.addEventListener('click', (event) => {
-                                // Allow download for all items
                                 if (!event.target.closest('.creator-link') && !event.target.closest('.socials-link')) {
                                     fetch(decoration.url)
                                         .then(response => {
-                                            if (!response.ok) {
-                                                throw new Error('Failed to fetch image');
-                                            }
+                                            if (!response.ok) throw new Error('Failed to fetch image');
                                             return response.blob();
                                         })
                                         .then(blob => {
-                                            const url = window.URL.createObjectURL(blob);
+                                            const url = URL.createObjectURL(blob);
                                             const a = document.createElement('a');
-                                            const extension = getFileExtension(decoration.url);
-
                                             a.href = url;
-                                            a.download = `${decoration.name}.${extension}`;
+                                            a.download = `${decoration.name}.${getFileExtension(decoration.url)}`;
                                             document.body.appendChild(a);
                                             a.click();
                                             a.remove();
-                                            window.URL.revokeObjectURL(url);
+                                            URL.revokeObjectURL(url);
                                         })
-                                        .catch(error => {
-                                            console.error('Error downloading image:', error);
-                                        });
+                                        .catch(error => console.error('Error downloading image:', error));
                                 }
                             });
 
+                            // Append elements to grid item
+                            gridItem.append(mainImg, previewImg, decorationName, creatorLink);
                             gridContainer.appendChild(gridItem);
                         });
 
@@ -243,7 +229,7 @@
                     const errorMessage = document.createElement('div');
                     errorMessage.textContent = 'Failed to load decorations. Please try again later.';
                     errorMessage.className = 'error-message';
-                    grid.appendChild(errorMessage);
+                    document.getElementById('grid').appendChild(errorMessage);
                 });
         }
 
