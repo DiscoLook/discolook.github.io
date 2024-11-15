@@ -16,6 +16,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
 
         h1 {
@@ -32,6 +33,8 @@
             gap: 20px;
             width: 100%;
             max-width: 1200px;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         .grid-item {
@@ -52,7 +55,7 @@
 
         .grid-item img {
             width: 100%;
-            height: 100px;
+            height: auto;
             object-fit: contain;
             border-radius: 12px 12px 0 0;
             transition: opacity 0.3s;
@@ -111,7 +114,17 @@
 
         @media (max-width: 768px) {
             .grid-container {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+                padding: 5px;
+            }
+
+            .grid-item img {
+                max-height: 150px;
+            }
+
+            .grid-item {
+                margin: 0 auto;
             }
         }
 
@@ -122,6 +135,14 @@
 
             .group-title {
                 font-size: 20px;
+            }
+
+            .grid-item img {
+                max-height: 120px;
+            }
+
+            .decoration-name {
+                font-size: 12px;
             }
         }
     </style>
@@ -148,8 +169,7 @@
                 const logoImage = document.createElement('img');
                 logoImage.src = logos[groupName];
                 logoImage.alt = `${groupName} Logo`;
-                logoImage.style.width = 'auto';
-                logoImage.style.height = '80px';  // Adjust height to make logo larger
+                logoImage.style.height = '60px';  // Adjusted logo height for mobile screens
 
                 // Replace the text content with the logo
                 groupTitleElement.innerHTML = '';
@@ -253,8 +273,12 @@
                                 }
                             });
 
-                            // Append elements to grid item
-                            gridItem.append(mainImg, previewImg, decorationName, creatorLink);
+                            // Append items to the grid item
+                            gridItem.appendChild(mainImg);
+                            gridItem.appendChild(previewImg);
+                            gridItem.appendChild(decorationName);
+                            gridItem.appendChild(creatorLink);
+
                             gridContainer.appendChild(gridItem);
                         });
 
@@ -264,25 +288,14 @@
                 .catch(error => {
                     console.error('Error loading decorations:', error);
                     const errorMessage = document.createElement('div');
-                    errorMessage.textContent = 'Failed to load decorations. Please try again later.';
                     errorMessage.className = 'error-message';
-                    document.getElementById('grid').appendChild(errorMessage);
+                    errorMessage.textContent = 'Failed to load decorations.';
+                    document.body.appendChild(errorMessage);
                 });
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            loadGroupLogos()
-                .then(logos => {
-                    loadDecorations(logos);
-                })
-                .catch(error => {
-                    console.error('Error loading data:', error);
-                    const errorMessage = document.createElement('div');
-                    errorMessage.textContent = 'Failed to load gallery data. Please try again later.';
-                    errorMessage.className = 'error-message';
-                    document.getElementById('grid').appendChild(errorMessage);
-                });
-        });
+        // Load logos and decorations
+        loadGroupLogos().then(logos => loadDecorations(logos));
     </script>
 </body>
 </html>
