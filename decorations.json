@@ -447,6 +447,32 @@
                 "preview": "https://i.ibb.co/Vtr3mXD/image.png",
                 "creator": "FoxStorm1",
                 "id": "789872551731527690",
+                "creatorDecor": true,
+                "socials": "https://discordapp.com/users/789872551731527690",
+                "decorText": "For Zoink"
+            },
+            {
+                "name": "Baizhu",
+                "url": "https://i.ibb.co/DbmrmN7/Ho-Yo-LAB-Avatar-Frame-Baizhu.png",
+                "preview": "https://i.ibb.co/SNg7XH6/image.png",
+                "creator": "FoxStorm1",
+                "id": "789872551731527690",
+                "creatorDecor": false
+            },
+            {
+                "name": "Barbara",
+                "url": "https://i.ibb.co/N14T8xx/Ho-Yo-LAB-Avatar-Frame-Barbara.png",
+                "preview": "https://i.ibb.co/y4NDjTT/image.png",
+                "creator": "FoxStorm1",
+                "id": "789872551731527690",
+                "creatorDecor": false
+            },
+            {
+                "name": "Bennett",
+                "url": "https://i.ibb.co/zJ0kb8D/Ho-Yo-LAB-Avatar-Frame-Bennett.png",
+                "preview": "https://i.ibb.co/RG8T6gB/image.png",
+                "creator": "FoxStorm1",
+                "id": "789872551731527690",
                 "creatorDecor": false
             }
         ],
