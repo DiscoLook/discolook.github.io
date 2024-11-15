@@ -14,7 +14,6 @@ We accept new decoration submissions through this form: [DiscoLook Upload Form](
 
 ### Genshin Impact
 
-- **Arlecchino**
 - **Baizhu**
 - **Barbara**
 - **Bennett**
