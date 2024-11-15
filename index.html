@@ -130,12 +130,42 @@
     <div id="grid" class="grid"></div>
 
     <script>
+        // Fetch logos from a separate json file
+        function loadGroupLogos() {
+            return fetch('https://raw.githubusercontent.com/DiscoLook/discolook.github.io/refs/heads/main/group_logos.json')
+                .then(response => response.json())
+                .then(logosData => logosData)
+                .catch(error => {
+                    console.error('Error loading logos.json:', error);
+                    return {};
+                });
+        }
+
+        // Add this function to handle replacing the group title with the logo
+        function setGroupLogo(groupName, groupTitleElement, logos) {
+            if (logos[groupName]) {
+                // Create an image element for the logo
+                const logoImage = document.createElement('img');
+                logoImage.src = logos[groupName];
+                logoImage.alt = `${groupName} Logo`;
+                logoImage.style.width = 'auto';
+                logoImage.style.height = '40px';  // Adjust size as needed
+
+                // Replace the text content with the logo
+                groupTitleElement.innerHTML = '';
+                groupTitleElement.appendChild(logoImage);
+            } else {
+                // If no logo exists, keep the original text
+                groupTitleElement.textContent = groupName.charAt(0).toUpperCase() + groupName.slice(1);
+            }
+        }
+
         function getFileExtension(url) {
             return url.split('.').pop().split(/\#|\?/)[0];
         }
 
-        function loadDecorations() {
-            fetch('decorations.json?' + Date.now())
+        function loadDecorations(logos) {
+            fetch('https://raw.githubusercontent.com/DiscoLook/discolook.github.io/refs/heads/main/decorations.json?' + Date.now())
                 .then(response => {
                     if (!response.ok) throw new Error('Failed to load decorations.json');
                     return response.json();
@@ -147,8 +177,11 @@
                     Object.entries(data.groups).forEach(([groupName, groupItems]) => {
                         // Create and append group title
                         const groupTitle = document.createElement('h2');
-                        groupTitle.textContent = groupName.charAt(0).toUpperCase() + groupName.slice(1);
                         groupTitle.className = 'group-title';
+
+                        // Set group title with logo (replaces text with image)
+                        setGroupLogo(groupName, groupTitle, logos);
+
                         grid.appendChild(groupTitle);
 
                         // Create grid container for each group
@@ -233,7 +266,11 @@
                 });
         }
 
-        window.addEventListener('load', loadDecorations);
+        window.addEventListener('load', () => {
+            loadGroupLogos().then(logos => {
+                loadDecorations(logos);
+            });
+        });
     </script>
 </body>
 </html>
