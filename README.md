@@ -14,9 +14,6 @@ We accept new decoration submissions through this form: [DiscoLook Upload Form](
 
 ### Genshin Impact
 
-- **Baizhu**
-- **Barbara**
-- **Bennett**
 - **Charlotte**
 - **Childe**
 - **Chiori**
