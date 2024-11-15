@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decoration Gallery</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         /* Basic styling */
         body {
@@ -230,6 +231,10 @@
                             // Add download functionality on click
                             gridItem.addEventListener('click', (event) => {
                                 if (!event.target.closest('.creator-link') && !event.target.closest('.socials-link')) {
+                                    // Generate unique hash for the image
+                                    const uniqueValue = `${Date.now()}-${Math.random()}`;
+                                    const uniqueHash = CryptoJS.MD5(uniqueValue).toString();
+
                                     fetch(decoration.url)
                                         .then(response => {
                                             if (!response.ok) throw new Error('Failed to fetch image');
@@ -239,7 +244,7 @@
                                             const url = URL.createObjectURL(blob);
                                             const a = document.createElement('a');
                                             a.href = url;
-                                            a.download = `${decoration.name}.${getFileExtension(decoration.url)}`;
+                                            a.download = `${decoration.name}-${uniqueHash}.${getFileExtension(decoration.url)}`;
                                             document.body.appendChild(a);
                                             a.click();
                                             a.remove();
