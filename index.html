@@ -131,14 +131,13 @@
     <div id="grid" class="grid"></div>
 
     <script>
-        // Fetch logos from a separate json file
+        // Fetch logos and decorations from separate json files dynamically
         function loadGroupLogos() {
-            return fetch('https://raw.githubusercontent.com/DiscoLook/discolook.github.io/refs/heads/main/group_logos.json')
+            return fetch('https://raw.githubusercontent.com/DiscoLook/discolook.github.io/refs/heads/main/group_logos.json?' + Date.now())
                 .then(response => response.json())
-                .then(logosData => logosData)
                 .catch(error => {
-                    console.error('Error loading logos.json:', error);
-                    return {};
+                    console.error('Error loading group_logos.json:', error);
+                    return {};  // Return an empty object if logos cannot be loaded
                 });
         }
 
@@ -150,7 +149,7 @@
                 logoImage.src = logos[groupName];
                 logoImage.alt = `${groupName} Logo`;
                 logoImage.style.width = 'auto';
-                logoImage.style.height = '40px';  // Adjust size as needed
+                logoImage.style.height = '80px';  // Adjust height to make logo larger
 
                 // Replace the text content with the logo
                 groupTitleElement.innerHTML = '';
@@ -271,10 +270,18 @@
                 });
         }
 
-        window.addEventListener('load', () => {
-            loadGroupLogos().then(logos => {
-                loadDecorations(logos);
-            });
+        window.addEventListener('DOMContentLoaded', () => {
+            loadGroupLogos()
+                .then(logos => {
+                    loadDecorations(logos);
+                })
+                .catch(error => {
+                    console.error('Error loading data:', error);
+                    const errorMessage = document.createElement('div');
+                    errorMessage.textContent = 'Failed to load gallery data. Please try again later.';
+                    errorMessage.className = 'error-message';
+                    document.getElementById('grid').appendChild(errorMessage);
+                });
         });
     </script>
 </body>
