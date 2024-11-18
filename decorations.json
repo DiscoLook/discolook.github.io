@@ -466,9 +466,7 @@
                 "preview": "https://i.ibb.co/Vtr3mXD/image.png",
                 "creator": "FoxStorm1",
                 "id": "789872551731527690",
-                "creatorDecor": true,
-                "socials": "https://discordapp.com/users/789872551731527690",
-                "decorText": "For Zoink"
+                "creatorDecor": false
             },
             {
                 "name": "Baizhu",
