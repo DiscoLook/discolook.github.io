@@ -14,16 +14,6 @@ We accept new decoration submissions through this form: [DiscoLook Upload Form](
 
 ### Genshin Impact
 
-- **Charlotte**
-- **Childe**
-- **Chiori**
-- **Chongyun**
-- **Clorinde**
-- **Dehya**
-- **Emilie**
-- **Faruzan**
-- **Hu Tao**
-- **Kachina**
 - **Kamisato Ayaka**
 - **Kinich**
 - **Klee**
