@@ -29,10 +29,10 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Ensures flexibility */
+            grid-auto-rows: auto; /* Adjusts the height based on content */
             gap: 20px;
             width: 100%;
-            max-width: 1200px;
             padding: 10px;
             box-sizing: border-box;
         }
@@ -112,25 +112,33 @@
             margin-top: 20px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .grid-container {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
                 gap: 15px;
-                padding: 5px;
-            }
-
-            .grid-item img {
-                max-height: 150px;
             }
 
             .grid-item {
                 margin: 0 auto;
             }
+
+            .group-title {
+                font-size: 24px;
+            }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             h1 {
                 font-size: 28px;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
             }
 
             .group-title {
@@ -138,11 +146,52 @@
             }
 
             .grid-item img {
-                max-height: 120px;
+                max-height: 150px;
             }
 
             .decoration-name {
                 font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+                text-align: center;
+            }
+
+            .group-title {
+                font-size: 18px;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+
+            .grid-item img {
+                max-height: 120px;
+            }
+
+            .decoration-name {
+                font-size: 10px;
+            }
+
+            .creator-link, .socials-link {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            h1 {
+                font-size: 20px;
+            }
+
+            .group-title {
+                font-size: 16px;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
             }
         }
     </style>
@@ -152,7 +201,7 @@
     <div id="grid" class="grid"></div>
 
     <script>
-        // Fetch logos and decorations from separate JSON files dynamically
+        // Fetch logos and decorations from separate json files dynamically
         function loadGroupLogos() {
             return fetch('https://raw.githubusercontent.com/DiscoLook/discolook.github.io/refs/heads/main/group_logos.json?' + Date.now())
                 .then(response => response.json())
@@ -194,99 +243,98 @@
                     const grid = document.getElementById('grid');
                     grid.innerHTML = ''; // Clear any existing content
 
-                    // Sort groups by the number of decorations (descending order)
-                    const sortedGroups = Object.entries(data.groups).sort((a, b) => b[1].length - a[1].length);
+                    Object.entries(data.groups)
+                        .sort((a, b) => b[1].length - a[1].length) // Sort groups by number of items in descending order
+                        .forEach(([groupName, groupItems]) => {
+                            // Create and append group title
+                            const groupTitle = document.createElement('h2');
+                            groupTitle.className = 'group-title';
 
-                    sortedGroups.forEach(([groupName, groupItems]) => {
-                        // Create and append group title
-                        const groupTitle = document.createElement('h2');
-                        groupTitle.className = 'group-title';
+                            // Set group title with logo (replaces text with image)
+                            setGroupLogo(groupName, groupTitle, logos);
 
-                        // Set group title with logo (replaces text with image)
-                        setGroupLogo(groupName, groupTitle, logos);
+                            grid.appendChild(groupTitle);
 
-                        grid.appendChild(groupTitle);
+                            // Create grid container for each group
+                            const gridContainer = document.createElement('div');
+                            gridContainer.className = 'grid-container';
 
-                        // Create grid container for each group
-                        const gridContainer = document.createElement('div');
-                        gridContainer.className = 'grid-container';
+                            groupItems.forEach(decoration => {
+                                const gridItem = document.createElement('div');
+                                gridItem.className = 'grid-item';
 
-                        groupItems.forEach(decoration => {
-                            const gridItem = document.createElement('div');
-                            gridItem.className = 'grid-item';
+                                // Main and preview images
+                                const mainImg = document.createElement('img');
+                                mainImg.src = decoration.url;
+                                mainImg.alt = decoration.name;
+                                mainImg.className = 'main';
+                                mainImg.loading = 'lazy';
 
-                            // Main and preview images
-                            const mainImg = document.createElement('img');
-                            mainImg.src = decoration.url;
-                            mainImg.alt = decoration.name;
-                            mainImg.className = 'main';
-                            mainImg.loading = 'lazy';
+                                const previewImg = document.createElement('img');
+                                previewImg.src = decoration.preview || '';
+                                previewImg.alt = `${decoration.name} Preview`;
+                                previewImg.className = 'preview';
+                                previewImg.loading = 'lazy';
 
-                            const previewImg = document.createElement('img');
-                            previewImg.src = decoration.preview || '';
-                            previewImg.alt = `${decoration.name} Preview`;
-                            previewImg.className = 'preview';
-                            previewImg.loading = 'lazy';
+                                // Decoration name
+                                const decorationName = document.createElement('div');
+                                decorationName.textContent = decoration.name;
+                                decorationName.className = 'decoration-name';
 
-                            // Decoration name
-                            const decorationName = document.createElement('div');
-                            decorationName.textContent = decoration.name;
-                            decorationName.className = 'decoration-name';
+                                // Creator link
+                                const creatorLink = document.createElement('a');
+                                creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
+                                creatorLink.textContent = decoration.creator;
+                                creatorLink.className = 'creator-link';
+                                creatorLink.target = '_blank';
 
-                            // Creator link
-                            const creatorLink = document.createElement('a');
-                            creatorLink.href = `https://discordapp.com/users/${decoration.id}`;
-                            creatorLink.textContent = decoration.creator;
-                            creatorLink.className = 'creator-link';
-                            creatorLink.target = '_blank';
-
-                            // Creator socials link if available
-                            if (decoration.creatorDecor && decoration.socials) {
-                                const socialsLink = document.createElement('a');
-                                socialsLink.href = decoration.socials;
-                                socialsLink.textContent = decoration.decorText || 'For Zoink';
-                                socialsLink.className = 'socials-link';
-                                socialsLink.target = '_blank';
-                                gridItem.appendChild(socialsLink);
-                            }
-
-                            // Add download functionality on click
-                            gridItem.addEventListener('click', (event) => {
-                                if (!event.target.closest('.creator-link') && !event.target.closest('.socials-link')) {
-                                    // Generate unique hash for the image
-                                    const uniqueValue = `${Date.now()}-${Math.random()}`;
-                                    const uniqueHash = CryptoJS.MD5(uniqueValue).toString();
-
-                                    fetch(decoration.url)
-                                        .then(response => {
-                                            if (!response.ok) throw new Error('Failed to fetch image');
-                                            return response.blob();
-                                        })
-                                        .then(blob => {
-                                            const url = URL.createObjectURL(blob);
-                                            const a = document.createElement('a');
-                                            a.href = url;
-                                            a.download = `${decoration.name}-${uniqueHash}.${getFileExtension(decoration.url)}`;
-                                            document.body.appendChild(a);
-                                            a.click();
-                                            a.remove();
-                                            URL.revokeObjectURL(url);
-                                        })
-                                        .catch(error => console.error('Error downloading image:', error));
+                                // Creator socials link if available
+                                if (decoration.creatorDecor && decoration.socials) {
+                                    const socialsLink = document.createElement('a');
+                                    socialsLink.href = decoration.socials;
+                                    socialsLink.textContent = decoration.decorText || 'For Zoink';
+                                    socialsLink.className = 'socials-link';
+                                    socialsLink.target = '_blank';
+                                    gridItem.appendChild(socialsLink);
                                 }
+
+                                // Add download functionality on click
+                                gridItem.addEventListener('click', (event) => {
+                                    if (!event.target.closest('.creator-link') && !event.target.closest('.socials-link')) {
+                                        // Generate unique hash for the image
+                                        const uniqueValue = `${Date.now()}-${Math.random()}`;
+                                        const uniqueHash = CryptoJS.MD5(uniqueValue).toString();
+
+                                        fetch(decoration.url)
+                                            .then(response => {
+                                                if (!response.ok) throw new Error('Failed to fetch image');
+                                                return response.blob();
+                                            })
+                                            .then(blob => {
+                                                const url = URL.createObjectURL(blob);
+                                                const a = document.createElement('a');
+                                                a.href = url;
+                                                a.download = `${decoration.name}-${uniqueHash}.${getFileExtension(decoration.url)}`;
+                                                document.body.appendChild(a);
+                                                a.click();
+                                                a.remove();
+                                                URL.revokeObjectURL(url);
+                                            })
+                                            .catch(error => console.error('Error downloading image:', error));
+                                    }
+                                });
+
+                                // Append items to the grid item
+                                gridItem.appendChild(mainImg);
+                                gridItem.appendChild(previewImg);
+                                gridItem.appendChild(decorationName);
+                                gridItem.appendChild(creatorLink);
+
+                                gridContainer.appendChild(gridItem);
                             });
 
-                            // Append items to the grid item
-                            gridItem.appendChild(mainImg);
-                            gridItem.appendChild(previewImg);
-                            gridItem.appendChild(decorationName);
-                            gridItem.appendChild(creatorLink);
-
-                            gridContainer.appendChild(gridItem);
+                            grid.appendChild(gridContainer);
                         });
-
-                        grid.appendChild(gridContainer);
-                    });
                 })
                 .catch(error => {
                     console.error('Error loading decorations:', error);
