@@ -152,7 +152,7 @@
     <div id="grid" class="grid"></div>
 
     <script>
-        // Fetch logos and decorations from separate json files dynamically
+        // Fetch logos and decorations from separate JSON files dynamically
         function loadGroupLogos() {
             return fetch('https://raw.githubusercontent.com/DiscoLook/discolook.github.io/refs/heads/main/group_logos.json?' + Date.now())
                 .then(response => response.json())
@@ -194,7 +194,10 @@
                     const grid = document.getElementById('grid');
                     grid.innerHTML = ''; // Clear any existing content
 
-                    Object.entries(data.groups).forEach(([groupName, groupItems]) => {
+                    // Sort groups by the number of decorations (descending order)
+                    const sortedGroups = Object.entries(data.groups).sort((a, b) => b[1].length - a[1].length);
+
+                    sortedGroups.forEach(([groupName, groupItems]) => {
                         // Create and append group title
                         const groupTitle = document.createElement('h2');
                         groupTitle.className = 'group-title';
